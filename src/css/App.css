@@ -1,0 +1,48 @@
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.removeScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.boxi {
+  width: 200px;
+  height: 200px;
+  border: 1px solid;
+  background-color: black;
+}
+
+.d {
+  transition: 0.2s ease;
+  transform: 0.1s ease;
+}
+
+.logobox {
+  margin-left: 190px;
+}
+
+
+
+.ahmbtncase>button {
+  width: 200px;
+  border: 0;
+  padding: 0.5em;
+  color: white;
+  border-radius: 10px;
+  background-color: rgb(223, 21, 97);
+}
+
+
+
+.vidiv {
+  /* border-radius: var(--dls-base-video-border-radius, 0) !important; */
+  /* height: 90% !important; */
+  overflow: hidden !important;
+  /* position: relative !important; */
+  width: 80% !important;
+  /* -webkit-box-sizing: border-box !important; */
+  will-change: transform !important;
+  /* box-sizing: border-box; */
+
+}
