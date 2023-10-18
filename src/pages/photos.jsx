@@ -59,7 +59,7 @@ function Photos() {
         //     headers: { "Content-Type": "multipart/form-data" },
         // })
         // navigate("/become-a-host/titles")
-        await httpAuth(`http://localhost:5000/listing/imageupload/${propertyId}`,
+        await httpAuth(`https://airbnclone-backend.onrender.com/listing/imageupload/${propertyId}`,
 
             {
                 method: "POST",
