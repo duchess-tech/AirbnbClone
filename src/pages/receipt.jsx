@@ -62,7 +62,7 @@ function Receipt(props) {
 
 
                         <div className="mt-4">
-                            <h5 className="text-lg">${property?.PropertyTitle}oooo</h5>
+                            <h5 className="text-lg">${property?.PropertyTitle}</h5>
                             <p className="text-lg ">
                                 <b>${property?.price}</b>
                                 <span className="fw-light">night</span>
@@ -104,7 +104,7 @@ function Receipt(props) {
 
             </div>
             <div style={{ padding: "3px", background: "rgb(221, 221, 221)" }}></div>
-            <Footer2 isEnabled={true} link1='/become-a-host/discount' link2="/become-a-host/public-celebration" />
+            <Footer2 isEnabled={true} link1='/become-a-host/discount' link2="/become-a-host/publish-celebration" />
         </div >
     )
 } export default Receipt

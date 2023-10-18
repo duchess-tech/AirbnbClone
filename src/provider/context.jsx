@@ -4,68 +4,82 @@ import React, { createContext, useState } from "react";
 export const Context = createContext(null);
 
 const ContextProvider = ({ children }) => {
-  //   const [mail, setmail] = useState("");
-  //   const [modalShow, setModalShow] = useState(false);
-  //   const [filterShow, setFilterShow] = useState(false);
-  //   const [searchShow, setSearchShow] = useState(false);
-  //   const [filterWeb, setFilterWeb] = useState(false);
-  //   const [fullscreen, setFullscreen] = useState(false);
+  const [email, setemail] = useState("");
   const [user, setUser] = useState({});
-  //   const [authloading, setauthloading] = useState(true);
-  //   const [existingUser, setexistingUser] = useState({});
-  //   const [wishlist, setwishlist] = useState([]);
-  //   const [property, setProperty] = useState([]);
-
-  //   const [activeButton, setActiveButton] = useState(
-  //     localStorage.getItem("active")
-  //       ? JSON.parse(localStorage.getItem("active"))
-  //       : "first",
-  //   );
-
+  const [property, setProperty] = useState([]);
+  const [Category, setCategory] = useState([]);
+  const [showLogin, setShowLogin] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
+  const [showEmailOtp, setShowEmailOtp] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+  const [loading, setloading] = useState(false)
+  const [shouldNavigate, setshouldNavigate] = useState(false)
   const [propertyId, setpropertyId] = useState(
     localStorage.getItem("propertyid")
       ? JSON.parse(localStorage.getItem("propertyId"))
       : ""
   );
+  const [Loggedin, setLoggedIn] = useState(
+    localStorage.getItem("loggedIn")
+      ? JSON.parse(localStorage.getItem("loggedIn"))
+      : null,
+  );
 
-  //   const [Loggedin, setLoggedIn] = useState(
-  //     localStorage.getItem("loggedin")
-  //       ? JSON.parse(localStorage.getItem("loggedin"))
-  //       : null,
-  //   );
+  const togglePopup = () => {
+    setShowPopup(!showPopup)
+    setloading(false)
+  }
+  const togglePopuptrue = () => {
+    setShowLogin(true)
+    setShowPopup(false)
+  }
 
-  //   const [existing, setexisting] = useState(
-  //     localStorage.getItem("existing")
-  //       ? JSON.parse(localStorage.getItem("existing"))
-  //       : false,
-  //   );
-  //   let isMounted = true;
+  const backTologin = () => {
+    setShowLogin(true)
+    setShowEmailOtp(false)
 
-  //   useEffect(() => {
-  //     const fetchWishlist = async () => {
-  //       try {
-  //         const response = await httpAuth.get("/wishlist");
-  //         setwishlist(response.data.wish);
-  //       } catch (error) {
-  //         if (error.response.data.msg == "unauthorised") {
-  //           setwishlist([]);
-  //         }
-  //       }
-  //     };
+  }
+  const backToConfirmEmail = () => {
+    setShowEmailOtp(true)
+    setShowRegister(false)
+  }
 
-  //     if (isMounted) {
-  //       fetchWishlist();
-  //     }
-  //     return () => {
-  //       isMounted = false;
-  //     };
-  //   }, []);
+
+  const exitRegister = () => {
+    setShowRegister(false)
+  }
 
   const initialState = {
     user,
     setUser,
     propertyId,
     setpropertyId,
+    property,
+    setProperty,
+    Category,
+    setCategory,
+    email,
+    setemail,
+    Loggedin,
+    setLoggedIn,
+    showLogin,
+    setShowLogin,
+    showEmailOtp,
+    setShowEmailOtp,
+    showRegister,
+    setShowRegister,
+    togglePopup,
+    togglePopuptrue,
+    backTologin,
+    backToConfirmEmail,
+    exitRegister,
+    loading,
+    setloading,
+    showPopup,
+    setShowPopup,
+    shouldNavigate,
+    setshouldNavigate
+
   };
 
   return <Context.Provider value={initialState}>{children}</Context.Provider>;

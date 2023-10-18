@@ -7,7 +7,13 @@ import { Context } from "../provider/context"
 
 function Description() {
     const [propertydescription, setpropertyDescription] = useState(true)
-    const [desC, setdesC] = useState([])
+    const [desC, setdesC] = useState({
+        "Family-Friendly": false,
+        "Unique": false,
+        "Stylish": false,
+        "Central": false,
+        "Spacious": false,
+    });
     const [updatetext, setupdatetext] = useState("You'll have a great time at this comfortable place to stay.")
     const [descriptionText, setDescriptionText] = useState("")
     const [textCount, setTextCount] = useState(50)
@@ -19,32 +25,29 @@ function Description() {
 
 
 
+
     const handleAdditionaldescription = (e) => {
-        const val = e.target.innerHTML
-        if (!desC.includes(val)) {
-            desC.push(val)
-            setColor("#C0BEBE")
-        }
-        else {
-            setdesC([...desC.filter((ad) => ad !== val)])
-            setColor("")
+
+        const val = e.target.innerHTML;
+        setdesC(prevDesC => ({
+            ...prevDesC, [val]: !prevDesC[val]
+        }));
 
 
-        }
     }
 
 
 
     const handleText = (e) => {
-        const textlnt = title.current.value.length
-        setTextCount(textlnt)
+        const textlnt = e.length;
+        setupdatetext(e);
+        setTextCount(textlnt);
     }
-
 
     const uploadAddDescription = async (e) => {
         const additionalDescription = desC
         try {
-            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { additionalDescription });
+            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, additionalDescription);
             setpropertyDescription(false)
             setColor("")
         }
@@ -72,7 +75,7 @@ function Description() {
 
         <div>
             <Navbar3 />
-            {propertydescription == true && <>
+            {propertydescription && <>
                 <div className="mt-72">
                     <div className="w-[700px] m-auto">
                         <h2 className="text-3xl font-semibold ">
@@ -84,11 +87,16 @@ function Description() {
                     </div>
 
                     <div className="m-auto w-[700px]  flex flex-wrap  gap-3">
-                        <button style={{ backgroundColor: color }} onClick={(e) => handleAdditionaldescription(e)} className="border w-44  p-3   rounded-pill ">Family-Friendly</button>
-                        <button style={{ backgroundColor: color }} onClick={(e) => handleAdditionaldescription(e)} className="border w-44  p-3   rounded-pill ">Unique</button>
-                        <button style={{ backgroundColor: color }} onClick={(e) => handleAdditionaldescription(e)} className="border w-44  p-3  rounded-pill ">Stylish</button>
-                        <button style={{ backgroundColor: color }} onClick={(e) => handleAdditionaldescription(e)} className="border w-44 p-3   rounded-pill ">Central</button>
-                        <button style={{ backgroundColor: color }} onClick={(e) => handleAdditionaldescription(e)} className="border w-44   p-3   rounded-pill ">Spacious</button>
+                        {Object.keys(desC).map(key => (
+                            <button
+                                key={key}
+                                onClick={handleAdditionaldescription}
+                                style={{ backgroundColor: desC[key] ? "#C0BEBE" : "" }}
+                                className="border w-44  p-3 rounded-pill"
+                            >
+                                {key}
+                            </button>
+                        ))}
 
                     </div>
 
@@ -120,7 +128,7 @@ function Description() {
                             </p>
                         </div>
                         <div className="m-auto w-[700px]">
-                            <textarea className="w-[600px] p-4 h-[250px] rounded-xl text-xl border-2 border-black " ref={title} name="" id="title" maxLength={500} onChange={(e) => handleText(e.target.value)} defaultValue={updatetext}></textarea>
+                            <textarea className="w-[600px] p-4 h-[250px] rounded-xl text-xl border-2 border-black " ref={title} name="" id="title" maxLength={500} value={updatetext} onChange={(e) => handleText(e.target.value)}></textarea>
                             <p>{textCount}/500</p>
                         </div>
                     </div>

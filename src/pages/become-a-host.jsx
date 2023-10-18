@@ -7,38 +7,39 @@ import Listings from '../component/listings'
 import Navbar2 from '../component/navbar2'
 import Defaultnav1 from '../layouts/defaultnav1'
 import { Context } from '../provider/context'
+import httpAuth from '../utils/http'
 
 
 
 function BecomeAHost() {
     const [parent, setparent] = useState(true)
     const [showContent, setShowContent] = useState(false);
-    const {setUser,User} = useContext(Context);
+    const { setUser, user } = useContext(Context);
     let isMounted = true;
 
     useEffect(() => {
-        const onFetchUser = async () => {
-          try {
-            const response = await httpAuth.get("/user/getuser");
-            setUser(response.data.user);
-          } catch (error) {
-            
-          }
+        const fetchUser = async () => {
+            console.log("res")
+            try {
+                const response = await httpAuth.get("/user/getuser");
+                setUser(response.data.user);
+            } catch (error) {
+                console.log(error)
+            }
         };
-    
+
         if (isMounted) {
-          onFetchUser();
+            fetchUser();
         }
         return () => {
-          isMounted = false;
+            isMounted = false;
         };
-      }, []);
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowContent(true);
         })
-
         return () => clearTimeout(timer);
     }, []);
 
@@ -49,15 +50,15 @@ function BecomeAHost() {
     return (
 
         <section className={`${showContent ? 'show' : ''}`}>
-            {parent == true && <>
+            {parent && <>
                 <Navbar2 />
                 <div className='p-6 m-auto pt-32 2xl:pt-24 w-full lg:w-2/3 sm:w-full md:w-5/6  2xl:w-1/2'>
-                    <h1 className='lg:text-2xl md:text-3xl mb-4  2xl:text-3xl'> Welcome back,{ User?.firstname}</h1>
+                    <h1 className='lg:text-2xl md:text-3xl mb-4  2xl:text-3xl'> Welcome back,{user?.firstname} {user?.lastname}</h1>
                     <h3 className='mb-2 text-xl'>Finish your listing</h3>
 
-                    <Listings name="Your  listing startedmarch,2023" />
-                    <Listings name="Your  listing startedmarch,2023" />
-                    <Listings name="Your unique space listing startedmarch,2023" />
+                    <Listings name="Your  listing started march,2023" />
+                    <Listings name="Your  listing started march,2023" />
+                    <Listings name="Your unique space listing started march,2023" />
                     <h3 className='mt-12 text-2xl font-semibold'>Start a new listing</h3>
                     <Link to="/become-a-host/overview" className='text-black' onClick={handleclick} style={{ textDecoration: "none" }} >
                         <div className=" w-full  md:border-b-2 border-b-[rgb(221,221,221)] flex mt-3 justify-between items-center pb-4">

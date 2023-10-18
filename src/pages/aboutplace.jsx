@@ -18,7 +18,6 @@ function Aboutplace() {
             handle_SetpropId(propertyId)
             setpropertyId(propertyId)
             navigate('/become-a-host/structure')
-
         }
         catch (error) {
             console.log(error)

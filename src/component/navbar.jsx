@@ -1,10 +1,27 @@
 import "../css/nav.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressBook, faBars, faCoffee, faFilter, faFilterCircleDollar, faFilterCircleXmark, faFolderTree, faHamburger, faSearch, faSmog, faTree, faTreeCity, faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { useState } from "react"
+import { faAddressBook, faBars, faCoffee, faFilter, faFilterCircleDollar, faFilterCircleXmark, faFolderTree, faHamburger, faL, faSearch, faSmog, faTree, faTreeCity, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
+import { Context } from "../provider/context"
+import LoginOrSignup from "./modal5"
+import Filter from "./filter"
 function Navbar(props) {
-    const { togglePopuptrue, setShowPopup, showPopup, togglePopup } = props
+    const { HandleCategory } = props
+    const { Loggedin, showPopup, togglePopup } = useContext(Context)
+    const [popupFilter, setPopupFilter] = useState(false)
+    const handleParam = (e) => {
+        let data = e.target.innerHTML
+        console.log(data)
+        HandleCategory(data)
+    }
+
+
+
+    const handleFilter = () => {
+        if (popupFilter == true) setPopupFilter(false)
+        if (popupFilter == false) setPopupFilter(true)
+    }
 
     return (
         <>
@@ -41,29 +58,23 @@ function Navbar(props) {
                 </div>
 
                 <div className="flex justify-around items-center mr-20  w-[270px]">
-                    <Link className="" to="/airbnbyourhome">Airbnb your home</Link>
+
+
+                    {Loggedin ? <Link className="" to="/airbnbyourhome">Switch to hoisting</Link> : <Link className="" to="/airbnbyourhome">Airbnb your home</Link>}
+
                     <svg className=" w-[20px] h-[20px]">
                         <path d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z"></path>
                     </svg>
-                    <button className="personal-info" onClick={togglePopup
-                    } >
+                    <button className="personal-info relative" onClick={togglePopup} >
                         <FontAwesomeIcon icon={faBars} />
                         <FontAwesomeIcon size='2x' icon={faUserCircle} />
+                        <div className="wishlength">
+                            <span>6 </span>
+                        </div>
                     </button>
                     {
                         showPopup &&
-                        <div className="w-[250px] h-[200px] shadow absolute  rounded-xl border-2 bg-[#ffffff] top-32">
-                            <div className="p-3 ">
-                                <h3 className="text-md mt-2 cursor-pointer" onClick={togglePopuptrue} >Log in</h3>
-                                <h3 className="text-md mt-3  cursor-pointer" onClick={togglePopuptrue}  >Sign in</h3>
-                            </div>
-                            <hr />
-                            <div className="p-3 ">
-                                <h3 className="text-md mt-2  cursor-pointer ">Airbnb your home</h3>
-                                <h3 className="text-md mt-3  cursor-pointer">Help</h3>
-                            </div>
-
-                        </div>
+                        <LoginOrSignup />
                     }
 
                 </div>
@@ -73,135 +84,80 @@ function Navbar(props) {
 
 
 
-            <div className="px-12 flex gap-8 items-center ">
-                <div className="flex mt-4 gap-8 removeScrollbar overflow-auto  w-[9/12]" >
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/amazingpool.jpg'></img>
-                        <span>Amazingpool</span>
+            <div className="px-10 flex  items-center  ">
+                <div className="flex px-3 mt-4 gap-10 removeScrollbar overflow-auto items-center  " >
+
+                    <div className='nav-item cursor-pointer whitespace-nowrap ' >
+                        <img className='icon-img' src='/navimages/beds&breakfast.jpg'></img>
+                        <span onClick={handleParam}>Beds and breakfast</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/beachfont.jpg'></img>
-                        <span>Beachfont</span>
-                    </div>
-
-                    <div className='nav-item cursor-pointer' >
-                        <img className='icon-img' src='/navimages/beds&breakfast.jpg'></img>
-                        <span>Beds&Breakfast</span>
+                        <span onClick={handleParam}>Lake</span>
                     </div>
                     <div className='nav-item cursor-pointer' >
                         <img className='icon-img' src='/navimages/cabins.jpg'></img>
-                        <span>Carbins</span>
+                        <span onClick={handleParam}>Cabin</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/castles.jpg'></img>
-                        <span>Castles</span>
+                        <span onClick={handleParam}>Castle</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/chefs kitchen.jpg'></img>
-                        <span>Chef'kitchen</span>
-                    </div>
-                    <div className='nav-item cursor-pointer' >
-                        <img className='icon-img' src='/navimages/containers.jpg'></img>
-                        <span>Containers</span>
+                        <img className='icon-img' src='/navimages/amazingpool.jpg'></img>
+                        <span onClick={handleParam}>Pool</span>
                     </div>
 
                     <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/countrysides.jpg'></img>
-                        <span>Contrtsides</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/design.jpg'></img>
-                        <span>Designs</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/dummusi.jpg'></img>
-                        <span>Dummusi</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/farms.jpg'></img>
-                        <span>Farms</span>
+                        <span onClick={handleParam}>Farm</span>
                     </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/houseboats.jpg'></img>
-                        <span >Houseboats</span>
-                    </div>
-                    <div className='nav-item cursor-pointer' >
-                        <img className='icon-img' src='/navimages/iconic.jpg'></img>
-                        <span>Iconic</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/islands.jpg'></img>
-                        <span>Islands</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/lake.jpg'></img>
-                        <span>Lakes</span>
-                    </div>
+
+
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/luxe.jpg'></img>
 
-                        <span>Luxe</span>
+                        <span onClick={handleParam} >Luxe</span>
                     </div>
+
+
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/manshions.jpg'></img>
-                        <span>Mansions</span>
+                        <span onClick={handleParam}>Mansion</span>
                     </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/nationalparks.jpg'></img>
-                        <span>National parks </span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/new.jpg'></img>
-                        <span>New </span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/omg.jpg'></img>
-                        <span>Omg</span>
-                    </div>
+
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/play.jpg'></img>
-                        <span>Play</span>
+                        <span onClick={handleParam}>Play</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/privaterooms.jpg'></img>
-                        <span>Privaterooms</span>
+                        <span onClick={handleParam}>Privaterooms</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
                         <img className='icon-img' src='/navimages/surfing.jpg'></img>
-                        <span>Surfing</span>
+                        <span onClick={handleParam}>Surfing</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/tinyhomes.jpg'></img>
-                        <span>Tinyhomes</span>
+                        <img className='icon-img' src='/navimages/houseboats.jpg'></img>
+                        <span onClick={handleParam}>Houseboats</span>
+                    </div>
+                    <div className='nav-item cursor-pointer' >
+                        <img className='icon-img' src='/navimages/iconic.jpg'></img>
+                        <span onClick={handleParam}>Iconic</span>
                     </div>
                     <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/top of the wowld.jpg'></img>
-                        <span>Topoftheworld</span>
-                    </div>
-                    <div className='nav-item cursor-pointer'>
-                        <img className='icon-img' src='/navimages/tower.jpg'></img>
-                        <span>Tower</span>
-                    </div>
-                    <div>
-                        <img className='icon-img' src='/navimages/trending.jpg'></img>
-                        <span>Trending</span>
-                    </div>
-                    <div className='nav-item'>
-                        <img className='icon-img' src='/navimages/trulli.jpg'></img>
-                        <span>Trulli</span>
-                    </div>
-                    <div className='nav-item'>
-                        <img className='icon-img' src='/navimages/vineyards.jpg'></img>
-                        <span>vineyards</span>
+                        <img className='icon-img' src='/navimages/islands.jpg'></img>
+                        <span onClick={handleParam}>Island</span>
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <button className="w-[100px] h-[50px]  border rounded-lg">Filter  <FontAwesomeIcon icon={faFilter} /></button>
+                    <button className="w-[100px] h-[50px]  border rounded-lg" onClick={handleFilter}>Filter  <FontAwesomeIcon icon={faFilter} /></button>
                     <button className="w-[250px] h-[50px]  border rounded-lg">Display total before taxes</button>
 
                 </div>
             </div>
-
+            {popupFilter && <Filter />}
 
 
         </>

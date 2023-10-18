@@ -1,35 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Home from './App'
-import App from './App'
+import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css'
 import './css/App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import GeneralErrorpage from './component/generalerror'
-import Imageupload from './pages/imageupload'
-import Listings from './pages/become-a-host'
-import BecomeAHost from './pages/become-a-host'
-import Structure from './pages/structure'
-import PrivacyType from './pages/privacty-type'
-import Aboutplace from './pages/aboutplace'
-import Overview from './pages/overview'
-import Floorplan from './pages/floorplan'
-import Standout from './pages/standout'
-import Amenities from './pages/amenities'
-import Photos from './pages/photos'
-import Title from './pages/title'
-import Description from './pages/description'
-import FinishedSetup from './pages/finshedsetup'
-import Visibility from './pages/visibility'
-import Price from './pages/price'
-import Legal from './pages/legal'
-import Discount from './pages/discount'
-import Receipt from './pages/receipt'
-import AirbnbYourHome from './pages/AIrbnbyourspace'
-import ContextProvider from './provider/context'
-import PublicCelebration from './pages/publishCelebration'
-import ManageSpace from './pages/manageYourSpace'
+import { lazy, Suspense } from 'react';
+import Overview from './pages/overview';
+import PrivacyType from './pages/privacty-type';
+import Aboutplace from './pages/aboutplace';
+import ContextProvider from './provider/context';
 
+
+const Home = lazy(() => import('./App'));
+const GeneralErrorpage = lazy(() => import('./component/generalerror'));
+const Imageupload = lazy(() => import('./pages/imageupload'));
+const Listings = lazy(() => import('./pages/become-a-host'));
+const BecomeAHost = lazy(() => import('./pages/become-a-host'));
+const Structure = lazy(() => import('./pages/structure'));
+const Floorplan = lazy(() => import('./pages/floorplan'));
+const Standout = lazy(() => import('./pages/standout'));
+const Amenities = lazy(() => import('./pages/amenities'));
+const Photos = lazy(() => import('./pages/photos'));
+const Title = lazy(() => import('./pages/title'));
+const Description = lazy(() => import('./pages/description'));
+const FinishedSetup = lazy(() => import('./pages/finshedsetup'));
+const Visibility = lazy(() => import('./pages/visibility'));
+const Price = lazy(() => import('./pages/price'));
+const Legal = lazy(() => import('./pages/legal'));
+const Discount = lazy(() => import('./pages/discount'));
+const Receipt = lazy(() => import('./pages/receipt'));
+const AirbnbYourHome = lazy(() => import('./pages/AIrbnbyourspace'));
+const PublicCelebration = lazy(() => import('./pages/publishCelebration'));
+const ManageSpace = lazy(() => import('./pages/manageYourSpace'));
 
 const router = createBrowserRouter([
   {
@@ -147,9 +149,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ContextProvider>
-      <RouterProvider router={router} />
-
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </ContextProvider>
-
   </React.StrictMode>
+
 )

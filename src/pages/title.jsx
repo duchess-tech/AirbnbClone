@@ -15,31 +15,21 @@ function Title(props) {
 
 
     const handleText = (e) => {
-        const textLenght = title.current.value.length
-        setupdatetext(textLenght)
-    }
+        const textLenght = e.target.value.length;
+        setupdatetext(textLenght);
+    };
 
-    // const handletitle = () => {
-    //     const titleText = title.current.value
-    //     setPropertyTitle(titleText)
-    // }
-
-    const uploadTitle = async (e) => {
-        const titleText = await title.current.value
-        setPropertyTitle(titleText)
-        console.log(PropertyTitle)
+    const uploadTitle = async () => {
+        const titleText = title.current.value;
 
         try {
-            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { PropertyTitle });
-            navigate("/become-a-host/description")
+            await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { PropertyTitle: titleText });
+            setPropertyTitle(titleText)
+            navigate("/become-a-host/description");
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(error)
-        }
-
     }
-
-
 
     return (
         <div>
@@ -54,7 +44,7 @@ function Title(props) {
                     </p>
                 </div>
                 <div className="m-auto w-[700px]">
-                    <textarea className="w-[600px] p-4 h-[200px] text-2xl border-2 border-black " ref={title} name="" id="" maxLength={32} onChange={(e) => handleText(e.target.value)} />
+                    <textarea className="w-[600px] p-4 h-[200px] text-2xl border-2 border-black " ref={title} name="" id="" maxLength={32} onChange={handleText} />
                     <p>{updatetext}/32</p>
                 </div>
             </div>

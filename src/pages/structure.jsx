@@ -66,24 +66,20 @@ function Structure() {
                     <h3 className="2xl:text-4xl text-2xl">Which of these best describes your place?</h3>
                 </div>
                 <div className=" 2xl:w-[660px]  xl:w-[660px] lg:w-[660px] md:w-[660px] sm:w-[560px]  w-[380px] m-auto flex flex-wrap  md:p-2 gap-x-2 gap-y-4  sm:p-2 p-2  ">
-                    <Sc icon={faHouse} size="2x" DescName="House" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("House")} bgc={setbackgroundcolour("House")} />
-                    <Sc icon={faSwimmingPool} size="2x" DescName="Swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Swimming-pool")} bgc={setbackgroundcolour("Swimming-pool")} />
+                    <Sc icon={faHome} size="2x" DescName="House" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("House")} bgc={setbackgroundcolour("House")} />
+                    <Sc icon={faSwimmingPool} size="2x" DescName="Mansion" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Mansion")} bgc={setbackgroundcolour("Mansion")} />
                     <Sc icon={faCaravan} size="2x" DescName="Lake" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Lake")} bgc={setbackgroundcolour("Lake")} />
-                    <Sc icon={faSnowflake} size="2x" DescName="cabin" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("cabin")} bgc={setbackgroundcolour("cabin")} />
-                    <Sc icon={faBookAtlas} size="2x" DescName="castle" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("castle")} bgc={setbackgroundcolour("castle")} />
-                    <Sc icon={faRssSquare} size="2x" DescName="beds&breakfast" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("beds&breakfast")} bgc={setbackgroundcolour("beds&breakfast")} />
-                    <Sc icon={faHouseChimney} size="2x" DescName="swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("a")} />
-                    <Sc icon={faBookAtlas} size="2x" desname="swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("b")} />
-                    <Sc icon={faHouse} size="2x" desname="House" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("c")} />
-                    <Sc icon={faSwimmingPool} size="2x" desname="Swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("d")} />
-                    <Sc icon={faCaravan} size="2x" DescName="Lake" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("e")} />
-                    <Sc icon={faSnowflake} size="2x" DescName="cabin" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("f")} />
-                    <Sc icon={faBookAtlas} size="2x" DescName="castle" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("g")} />
-                    <Sc icon={faRssSquare} size="2x" DescName="beds&breakfast" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("h")} />
-                    <Sc icon={faHouseChimney} size="2x" desname="swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("i")} />
-                    <Sc icon={faBookAtlas} size="2x" desname="swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("j")} />
-                    <Sc icon={faBookAtlas} size="2x" desname="swimming-pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("k")} />
-                    <Sc icon={faSnowflake} size="2x" desname="cabin" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("l")} />
+                    <Sc icon={faSnowflake} size="2x" DescName="Cabin" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Cabin")} bgc={setbackgroundcolour("Cabin")} />
+                    <Sc icon={faBookAtlas} size="2x" DescName="Castle" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("castle")} bgc={setbackgroundcolour("castle")} />
+                    <Sc icon={faRssSquare} size="2x" DescName="Beds and breakfast" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Beds and breakfast")} bgc={setbackgroundcolour("Beds and breakfast")} />
+                    <Sc icon={faSwimmingPool} size="2x" DescName="Pool" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Pool")} bgc={setbackgroundcolour("Pool")} />
+                    <Sc icon={faSnowflake} size="2x" DescName="Farm" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Farm")} bgc={setbackgroundcolour("Farm")} />
+                    <Sc icon={faBookAtlas} size="2x" DescName="Surfing" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Surfing")} bgc={setbackgroundcolour("Surfing")} />
+                    <Sc icon={faHouse} size="2x" DesCName="vineyard" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("vineyard")} bgc={setbackgroundcolour("vineyard")} />
+                    <Sc icon={faSwimmingPool} size="2x" DescName="Island" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Island")} bgc={setbackgroundcolour("Island")} />
+                    <Sc icon={faCaravan} size="2x" DescName="Tower" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Tower")} bgc={setbackgroundcolour("Tower")} />
+                    <Sc icon={faSnowflake} size="2x" DescName="Topoftheworld" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Topoftheworld")} bgc={setbackgroundcolour("Topoftheworld")} />
+                    <Sc icon={faBookAtlas} size="2x" DescName="Privaterooms" onGetDescName={handleEnableFooterButton} bdgc={setbordercolour("Privaterooms")} bgc={setbackgroundcolour("Privaterooms")} />
 
 
                 </div>

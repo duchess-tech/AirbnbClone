@@ -6,8 +6,6 @@ import { Link } from "react-router-dom"
 
 function PublicCelebration() {
     const { setUser, user } = useContext(Context)
-
-
     let isMounted = true;
 
     useEffect(() => {
