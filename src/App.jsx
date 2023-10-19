@@ -36,7 +36,7 @@ function Home() {
     const HandleCategory = async (param) => {
         setIsActive(false)
         try {
-            const response = await httpAuth.get(`http://localhost:5000/category/getcategories?placeDescription=${param}`)
+            const response = await httpAuth.get(`/category/getcategories?placeDescription=${param}`)
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
