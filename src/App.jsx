@@ -36,7 +36,8 @@ function Home() {
     const HandleCategory = async (param) => {
         setIsActive(false)
         try {
-            const response = await httpAuth.get(`https://airbnclone-backend.onrender.com/category/getcategories?placeDescription=${param}`)
+            const response = await httpAuth.get
+                (`https://airbnclone-backend10.onrender.com/category/getcategories?placeDescription=${param}`)
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
