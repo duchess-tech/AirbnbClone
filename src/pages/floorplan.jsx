@@ -45,7 +45,7 @@ function Floorplan() {
 
     const uploadDetailNum = async (e) => {
         try {
-            const response = await httpAuth.post(`https://airbnclone-backend.onrender.com/listing/updatepropertybyid/${propertyId}`, { detailNum });
+            const response = await httpAuth.post(`https://airbnclone-backend10.onrender.com/listing/updatepropertybyid/${propertyId}`, { detailNum });
             navigate("/become-a-host/standout")
 
         }

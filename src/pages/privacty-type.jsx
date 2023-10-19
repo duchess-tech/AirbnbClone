@@ -33,7 +33,7 @@ function PrivacyType(props) {
 
     const uploadPrivacType = async (e) => {
         try {
-            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { TypeOfPlace });
+            const response = await httpAuth.post(`https://airbnclone-backend10.onrender.com/updatepropertybyid/${propertyId}`, { TypeOfPlace });
             navigate("/become-a-host/floorplan")
 
         }

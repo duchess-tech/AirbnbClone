@@ -33,7 +33,7 @@ function Amenities() {
     const uploadamenities = async (e) => {
 
         try {
-            await httpAuth.post(`https://airbnclone-backend.onrender.com/listing/updatepropertybyid/${propertyId}`, { Amenities })
+            await httpAuth.post(`https://airbnclone-backend10.onrender.com/listing/updatepropertybyid/${propertyId}`, { Amenities })
             navigate("/become-a-host/photos");
         }
 

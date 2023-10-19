@@ -27,7 +27,7 @@ export default function ConfirmEmail() {
         setloading(true)
         const userOtp = otp.current.value
         await axios.post(
-            "http://localhost:5000/signup/verifyotp", { userOtp }
+            "https://airbnclone-backend10.onrender.com/signup/verifyotp", { userOtp }
         )
             .then((res) => {
                 console.log(res)

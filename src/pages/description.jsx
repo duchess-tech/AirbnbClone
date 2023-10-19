@@ -62,7 +62,7 @@ function Description() {
         setDescriptionText(desText)
         const placeDescription = descriptionText
         try {
-            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { placeDescription });
+            const response = await httpAuth.post(`https://airbnclone-backend10.onrender.com/listing/updatepropertybyid/${propertyId}`, { placeDescription });
             navigate("/become-a-host/finishedsetup")
         }
         catch (error) {
