@@ -35,7 +35,7 @@ export default function SignupModal(props) {
         if (Email.includes("@" && "gmail" && ".com")) {
             seterrorword("")
             await axios.post(
-                "https://airbnclone-backend.onrender.com/signup/email", { Email }
+                "https://airbnclone-backend10.onrender.com/signup/email", { Email }
 
             )
                 .then((res) => {
