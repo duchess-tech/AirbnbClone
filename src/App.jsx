@@ -36,7 +36,7 @@ function Home() {
     const HandleCategory = async (param) => {
         setIsActive(false)
         try {
-            const response = await httpAuth.get(`https://airbnclone-backend10.onrender.com/category/getcategories?placeDescription=${param}`)
+            const response = await httpAuth.get(`http://localhost:5000/category/getcategories?placeDescription=${param}`)
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
@@ -52,7 +52,7 @@ function Home() {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await httpAuth.get(`property/getallproperties`);
+                const response = await httpAuth.get(`/property/getallproperties`);
                 setCategory(response.data.properties);
                 // localStorage.setItem("loggedIn", JSON.stringify(true));
             }

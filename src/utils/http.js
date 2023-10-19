@@ -1,7 +1,7 @@
 import axios from "axios";
 const httpAuth = axios.create({
   // baseURL: 'http://localhost:5000/listing/propertyid',
-  baseURL: `https://airbnclone-backend.onrender.com`,
+  baseURL: `https://airbnclone-backend10.onrender.com`,
   headers: {
     "Content-Type": "application/json",
   },
