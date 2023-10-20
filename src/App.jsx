@@ -11,6 +11,8 @@ import SignupModal from "./component/modal2";
 import ConfirmEmail from "./component/modal3";
 import shuffleArray from "./utils/shuffledata";
 import Register from "./component/modal4";
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 
@@ -35,15 +37,23 @@ function Home() {
 
     const HandleCategory = async (param) => {
         setIsActive(false)
+        setloading(true)
         try {
             const response = await httpAuth.get(`/category/getcategories?placeDescription=${param}`)
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
             }, 5000);
+            console.log(Category)
+            setloading(false)
 
-        } catch (error) {
+
+        }
+        catch (error) {
+            console.log(error)
             setCategory([]);
+            setloading(false)
+
         }
     };
 
@@ -51,20 +61,24 @@ function Home() {
 
     useEffect(() => {
         const fetchProperties = async () => {
+
             try {
+                setloading(true)
                 const response = await httpAuth.get(`/property/getallproperties`);
                 setCategory(response.data.properties);
                 // localStorage.setItem("loggedIn", JSON.stringify(true));
             }
             catch (error) {
-                setloading(true);
+                console.log(error)
             }
         };
         if (isMounted) {
             fetchProperties();
+
         }
         return () => {
             isMounted = false;
+            setloading(false)
         };
     }, []);
 
@@ -81,7 +95,7 @@ function Home() {
 
     return (
         <div>
-            {modal && <Modal />}
+            {/* {modal && <Modal />} */}
             <Navbar HandleCategory={HandleCategory} />
             {
                 showLogin && <SignupModal />
@@ -97,17 +111,19 @@ function Home() {
 
 
 
-            <main className="p-8 flex gap-x-8  gap-y-12  flex-wrap  "  >
+            <main className="p-8 flex justify-evenly  gap-y-12  flex-wrap  "  >
 
-                {Category.length > 0 ? (shuffleArray(Category)?.map((items, index) => (
-                    <>
-                        <div key={index} className=" justify-start" style={slideInStyles} >
-                            <Carousel className=" rounded-xl w-[350px] h-[300px]   overflow-hidden" showThumbs={false}
+                {Category.length > 0 && !loading ?
+                    (shuffleArray(Category)?.map((items, index) =>
+                    (
+
+                        <div style={slideInStyles} key={index}>
+                            <Carousel className=" rounded-xl w-[260px] h-[250px]   overflow-hidden"
                                 autoPlay
-                                infiniteLoop
+                                transition={{ duration: 2 }}
                                 interval={1000}
-                                stopOnHover>
-                                <div className="position-relative border ">
+                            >
+                                <div className="position-relative border " >
                                     <img
                                         src={items?.photos[0]}
                                         alt="image 1"
@@ -134,26 +150,30 @@ function Home() {
                             </Carousel>
 
 
-                            <p className="text-xl">
+                            <p className="text-lg  font-medium">
                                 Hosted by  <span style={{ textTransform: 'capitalize' }}>  {items?.host?.firstname} {items?.host?.lastname} </span>
                             </p>
-                            <h3 className="text-lg">7 night</h3>
-                            <h3 className="text-lg">${items.price}</h3>
+                            <h3 className="text-md font-thin">7 night</h3>
+                            <h3 className="text-md">${items.price}</h3>
                         </div>
-                    </>
 
 
-                ))) : (
-                    <div className="w-full h-[200px] mt-24 justify-center">
-                        <p style={{ textAlign: "center" }} className="  text-4xl">No content</p>
 
-                    </div>
-                )
+                    ))) : (loading &&
+                        <span className="spinner-border"></span>
+
+                    )
+
+
                 }
 
-
+                {/* {Category.length <= 0 && <div className="text-center">
+                 <div>
+                            <h1>No content</h1>
+                        </div>
+                </div>
+                } */}
             </main >
-
             < Footer />
         </div >
     )

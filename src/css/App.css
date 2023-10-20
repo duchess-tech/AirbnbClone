@@ -49,15 +49,17 @@ body::-webkit-scrollbar {
 
 .wishlength {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   background-color: red;
   border-radius: 50%;
   border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 25px;
+  bottom: 20px;
   left: 55px;
   color: white;
+  font-size: small;
+
 }

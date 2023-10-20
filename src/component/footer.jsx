@@ -4,8 +4,8 @@ import "../css/footer.css"
 
 function Footer() {
     return (
-        <div className="footer-case ">
-            <ul className="f1">
+        <div className="footer-case  flex  w-full">
+            <ul className="f1 p-4">
                 <li>Support</li>
                 <li>Help Center</li>
                 <li>Help CenterAirCover</li>
@@ -14,12 +14,12 @@ function Footer() {
                 <li>Our COVID-19 Response</li>
                 <li>Report a neighborhood concern</li>
             </ul>
-            <ul className="f2">
+            <ul className="f2 p-4">
                 <li>Community</li>
                 <li>Airbnb.org: disaster relief housing</li>
                 <li>Combating discrimination</li>
             </ul>
-            <ul className="f3">
+            <ul className="f3 p-4">
                 <li>Hosting</li>
                 <li><Link to="/airbnbyourhome">Airbnb your home</Link></li>
                 <li>AirCover for Hosts</li>
@@ -29,7 +29,7 @@ function Footer() {
                 <li>Airbnb-friendly apartments</li>
 
             </ul>
-            <ul className="f4">
+            <ul className="f4 p-4">
                 <li>Airbnb</li>
                 <li>Newsroom</li>
                 <li>Learn about new features</li>

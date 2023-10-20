@@ -1,7 +1,7 @@
 .footer-case {
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
-    padding: 25px;
+    /* padding: 25px; */
     background-color: rgb(247, 247, 247);
 }
 
@@ -15,8 +15,8 @@
 }
 
 .footer-case>ul>:first-child {
-    margin-bottom: 2em;
-    font-size: 18px;
+    /* margin-bottom: 2em; */
+    font-size: 14px;
     cursor: inherit;
 }
 
@@ -72,9 +72,3 @@
 
 
 }
-
-
-
-@media(max-width:900px) {}
-
-@media (min-width:901) {}
