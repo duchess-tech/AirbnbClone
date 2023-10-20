@@ -43,9 +43,9 @@ function Home() {
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
-            }, 5000);
-            console.log(Category)
-            setloading(false)
+                setloading(false)
+
+            });
 
 
         }
@@ -61,11 +61,14 @@ function Home() {
 
     useEffect(() => {
         const fetchProperties = async () => {
-
             try {
-                setloading(true)
+                setTimeout(() => {
+                    setloading(true)
+
+                })
                 const response = await httpAuth.get(`/property/getallproperties`);
                 setCategory(response.data.properties);
+
                 // localStorage.setItem("loggedIn", JSON.stringify(true));
             }
             catch (error) {
@@ -74,11 +77,13 @@ function Home() {
         };
         if (isMounted) {
             fetchProperties();
+            setloading(false)
 
         }
         return () => {
             isMounted = false;
             setloading(false)
+
         };
     }, []);
 
@@ -113,7 +118,7 @@ function Home() {
 
             <main className="p-8 flex justify-evenly  gap-y-12  flex-wrap  "  >
 
-                {Category.length > 0 && !loading ?
+                {Category.length > 0 &&
                     (shuffleArray(Category)?.map((items, index) =>
                     (
 
@@ -159,20 +164,21 @@ function Home() {
 
 
 
-                    ))) : (loading &&
-                        <span className="spinner-border"></span>
-
-                    )
+                    )))
 
 
                 }
+                {
+                    loading &&
+                    <span className="spinner-border"></span>
 
-                {/* {Category.length <= 0 && <div className="text-center">
-                 <div>
-                            <h1>No content</h1>
-                        </div>
-                </div>
-                } */}
+                }
+                {
+                    Category.length <= 0 && !loading &&
+                    <p>No content</p>
+                }
+
+
             </main >
             < Footer />
         </div >

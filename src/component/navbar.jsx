@@ -92,8 +92,8 @@ function Navbar(props) {
 
 
 
-            <div className="lg:px-14 lg:flex  items-center lg:mt-4  text-[#666666]  ">
-                <div className="flex  py-2  lg:gap-10   removeScrollbar overflow-auto items-center  " >
+            <div className="lg:px-10 lg:flex  items-center lg:mt-4  text-[#666666]  ">
+                <div className="flex  py-2  lg:gap-2   removeScrollbar overflow-auto items-center  " >
 
                     <div className='nav-item cursor-pointer whitespace-nowrap hover:text-black' >
                         <img className='icon-img' src='/navimages/beds&breakfast.jpg'></img>
