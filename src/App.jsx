@@ -23,7 +23,6 @@ function Home() {
     const [Category, setCategory] = useState([])
     const [loading, setloading] = useState(false)
     const [modal, setModal] = useState("true")
-    let isMounted = true;
     const [isActive, setIsActive] = useState(false);
     useEffect(() => {
         setModal(true)
@@ -43,23 +42,24 @@ function Home() {
             setCategory([...response.data.category]);
             setTimeout(() => {
                 setIsActive(true);
-                setloading(false)
 
             });
-
-
         }
         catch (error) {
             console.log(error)
             setCategory([]);
-            setloading(false)
 
+        }
+        finally {
+            setloading(false);
         }
     };
 
 
 
     useEffect(() => {
+        let isMounted = true;
+
         const fetchProperties = async () => {
             try {
                 setTimeout(() => {
@@ -67,22 +67,30 @@ function Home() {
 
                 })
                 const response = await httpAuth.get(`/property/getallproperties`);
-                setCategory(response.data.properties);
+                if (isMounted) {
+                    setCategory(response.data.properties);
+                    setloading(false)
+                    setIsActive(false);
+
+                    setTimeout(() => {
+                        setIsActive(true);
+                    }, 100);
+                }
 
                 // localStorage.setItem("loggedIn", JSON.stringify(true));
             }
             catch (error) {
                 console.log(error)
+                if (isMounted) {
+                    console.log(error);
+                    setloading(false);
+                }
             }
         };
-        if (isMounted) {
-            fetchProperties();
-            setloading(false)
+        fetchProperties();
 
-        }
         return () => {
             isMounted = false;
-            setloading(false)
 
         };
     }, []);
@@ -116,13 +124,12 @@ function Home() {
 
 
 
-            <main className="p-8 flex justify-evenly  gap-y-12  flex-wrap  "  >
+            <div className=" flex justify-evenly  p-8 gap-x-8 gap-y-12  flex-wrap  animate-pop-up">
 
                 {Category.length > 0 &&
                     (shuffleArray(Category)?.map((items, index) =>
                     (
-
-                        <div style={slideInStyles} key={index}>
+                        <div style={slideInStyles} className="relative  animate-pop-up    rounded-xl" key={index}>
                             <Carousel className=" rounded-xl w-[260px] h-[250px]   overflow-hidden"
                                 autoPlay
                                 transition={{ duration: 2 }}
@@ -163,7 +170,6 @@ function Home() {
                         </div>
 
 
-
                     )))
 
 
@@ -178,8 +184,8 @@ function Home() {
                     <p>No content</p>
                 }
 
+            </div>
 
-            </main >
             < Footer />
         </div >
     )
