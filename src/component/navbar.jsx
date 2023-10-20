@@ -1,6 +1,6 @@
 import "../css/nav.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressBook, faBars, faCoffee, faFilter, faFilterCircleDollar, faFilterCircleXmark, faFolderTree, faHamburger, faL, faSearch, faSmog, faTree, faTreeCity, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { Context } from "../provider/context"
@@ -92,7 +92,7 @@ function Navbar(props) {
 
 
 
-            <div className="lg:px-10 lg:flex  items-center lg:mt-4  text-[#666666]  ">
+            <div className="lg:px-1 lg:flex  items-center lg:mt-4  text-[#666666]  ">
                 <div className="flex  py-2  lg:gap-2   removeScrollbar overflow-auto items-center  " >
 
                     <div className='nav-item cursor-pointer whitespace-nowrap hover:text-black' >
