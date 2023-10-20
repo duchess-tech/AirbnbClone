@@ -169,7 +169,7 @@ function Home() {
 
                 }
                 {
-                    loading &&
+                    Category.length <= 0 && loading &&
                     <span className="spinner-border"></span>
 
                 }
