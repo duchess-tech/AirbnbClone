@@ -47,7 +47,7 @@ function Structure() {
     const uploadstucture = async (e) => {
 
         try {
-            const response = await httpAuth.post(`http://localhost:5000/listing/updatepropertybyid/${propertyId}`, { PlaceDescription });
+            const response = await httpAuth.post(`https://airbnclone-backend10.onrender.com/listing/updatepropertybyid/${propertyId}`, { PlaceDescription });
             navigate("/become-a-host/privacy-type")
 
         }

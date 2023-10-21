@@ -224,7 +224,16 @@ function Home() {
                 }
                 {
                     Category.length <= 0 && !loading &&
-                    <p>No content</p>
+
+
+
+
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong className="font-bold">Omo ooo!!!</strong>
+                        <span className="block sm:inline">Properties of the selected category cant be found</span>
+
+                    </div>
+                    // <p> Properties of the selected category cant be found</p>
                 }
 
             </div>

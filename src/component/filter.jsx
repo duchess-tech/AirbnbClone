@@ -1,14 +1,204 @@
 
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faMultiply } from '@fortawesome/free-solid-svg-icons'
-
+import httpAuth from '../utils/http'
+import { BsBuildings, BsHouse, BsHouses } from "react-icons/bs";
+import { TbBuildingHospital } from "react-icons/tb";
+import { MdOutlineWarehouse } from "react-icons/md";
+// import httpClient from "../Services/httpclient";
 export default function Filter() {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null)
-    const [min, setMin] = useState(10)
-    const [max, setMax] = useState(530)
+    const [minPrice, setMinPrice] = useState(10)
+    const [maxPrice, setMaxPrice] = useState(530)
+    const [TypeOfPlace, setTypeOfPlace] = useState("An entire place")
+    const [PlaceDescription, setPlaceDescription] = useState("");
+    const [filterProp, setFilterProp] = useState([]);
+    const [Amenities, setAmenities] = useState([])
+    const [bedrooms, setBedrooms] = useState({ color: 0, qty: "" });
+    const [beds, setBeds] = useState({ color: 0, qty: "" });
+    const [bathrooms, setBathrooms] = useState({ color: 0, qty: "" });
+    const [loading, setloading] = useState(false);
+    let isMounted = true;
+    const RoomsAndBedNo = [
+        { No: "Any" },
+        { No: "1" },
+        { No: "2" },
+        { No: "3" },
+        { No: "4" },
+        { No: "5" },
+        { No: "6" },
+        { No: "7" },
+        { No: "8+" },
+    ];
+
+    const handleBedroomsColor = (row) => {
+        if (row == 0) {
+            return setBedrooms({ ...bedrooms, color: row, qty: "" });
+        }
+        setBedrooms({ ...bedrooms, color: row, qty: row });
+        console.log("im here")
+
+    };
+
+    const handleBedColor = (i) => {
+        if (i == 0) {
+            return setBeds({ ...beds, color: i, qty: "" });
+        }
+        setBeds({ ...beds, color: i, qty: 1 });
+        console.log("im here")
+
+    };
+
+    const handleBathroomColor = (i) => {
+        if (i == 0) {
+            return setBathrooms({ ...bathrooms, color: i, qty: "" });
+        }
+        setBathrooms({ ...bathrooms, color: i, qty: i });
+        console.log("im here")
+
+    };
+
+    useEffect(() => {
+        const fetchProperties = async () => {
+            try {
+                setloading(true);
+                const response = await httpAuth.get(
+                    `FilterProperties/getFilteredproperties/?PlaceDescription=${PlaceDescription}&bedrooms=${bedrooms.qty}&beds=${beds.qty}&bathrooms=${bathrooms.qty}&TypeOfPlace=${TypeOfPlace}&Amenities=${Amenities}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
+                );
+                setFilterProp(response.data.property);
+                setloading(false);
+            } catch (error) {
+                setFilterProp([]);
+                setloading(true);
+                console.log(error.response.data.message);
+            }
+        };
+        if (isMounted) {
+            fetchProperties();
+        }
+        return () => {
+            isMounted = false;
+        };
+    }, [
+        PlaceDescription,
+        bedrooms.qty,
+        beds.qty,
+        bathrooms.qty,
+        TypeOfPlace,
+        Amenities,
+        minPrice,
+        maxPrice,
+    ]);
+
+    const handleTypeOfPlaceFilter = (e) => {
+        if (TypeOfPlaceFilter == e.currentTarget.id) {
+            setTypeOfPlace("");
+            return;
+        }
+        setTypeOfPlace(e.currentTarget.id);
+        console.log("im here")
+    };
+
+
+
+
+
+    const handlePlaceDescriptionFilter = (e) => {
+        if (PlaceDescription == e.currentTarget.id) {
+            setPlaceDescription("");
+            return;
+        }
+        setPlaceDescription(e.currentTarget.id);
+    };
+
+
+
+
+    // const { setFilterShow, setFullscreen, setProperty, property } =
+    //     useContext(Context);
+    // const [avgprice, setavgprice] = useState(0);
+    // const [amenity, setAmenity] = useState({ wifi: false, tv: false, kitchen: false, washer: false, airconditioning: false, pool: false, piano: false });
+
+
+
+    // // filter Amenities
+    // const handleToggleAmenities = (e) => {
+    //     setamenity({
+    //         ...amenity,
+    //         [e.currentTarget.id]: !amenity[e.currentTarget.id],
+    //     });
+
+    //     if (!amenity[e.currentTarget.id]) {
+    //         setamenities([...amenities, e.currentTarget.id]);
+    //     } else {
+    //         setamenities([
+    //             ...amenities.filter((amenity) => amenity !== e.currentTarget.id),
+    //         ]);
+    //     }
+    // };
+
+
+    // // calculate average Price
+    // useEffect(() => {
+    //     let totalPrice = property
+    //         .map((prop) => prop.price)
+    //         .reduce((total, value) => {
+    //             return total + value;
+    //         }, 0);
+    //     setavgprice(Math.round(totalPrice / property.length));
+    // });
+
+    // fetch properties
+
+
+    // //submit filter
+    // const handleSubmitFilter = () => {
+    //     setProperty(filterProp);
+    //     hideFilter();
+    // };
+
+    // //hide filter
+    // function hideFilter() {
+    //     setFilterShow(false);
+    //     setFullscreen(false);
+    // }
+
+    // // Clear All
+    // const handleClearAll = () => {
+    //     setamenity({
+    //         wifi: false,
+    //         tv: false,
+    //         kitchen: false,
+    //         washer: false,
+    //         airconditioning: false,
+    //         pool: false,
+    //         piano: false,
+    //     });
+    //     setamenities([]);
+    //     setprivacy("");
+    //     setstructure("");
+    //     setbathroom({ ...bathroom, color: 0, qty: "" });
+    //     setbedrooms({ ...bedrooms, color: 0, qty: "" });
+    //     setbed({ ...bed, color: 0, qty: "" });
+    //     setminprice(50);
+    //     setmaxprice(200);
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -57,8 +247,7 @@ export default function Filter() {
                                                 <h3>Minimum</h3>
                                                 <div className='flex'>
                                                     <p>$</p>
-                                                    <input defaultValue={min} className='  focus:outline-none' />
-
+                                                    <input defaultValue={minPrice} onChange={(e) => setMinPrice(e.target.value)} className='  focus:outline-none' />
                                                 </div>
                                             </div>
                                             <div className='lg:w-[100px] w-2   flex justify-center items-center'><span className='text-2xl'>-</span></div>
@@ -66,7 +255,7 @@ export default function Filter() {
                                                 <h3>Maximum</h3>
                                                 <div className='flex w-full'>
                                                     <p>$</p>
-                                                    <input defaultValue={530} className='focus:outline-none' ></input>
+                                                    <input defaultValue={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className='focus:outline-none' ></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -78,33 +267,20 @@ export default function Filter() {
                                     <div className=''>
                                         <p className='text-lg mt-4'>Bedrooms</p>
                                         <div className='flex  lg:space-x-3 space-x-2 mt-3  removeScrollbar overflow-auto'>
-                                            <div className='w-[100px] p-6 h-[30px] border-black flex rounded-pill bg-black text-white border-2 justify-center items-center'>
-                                                <span className=''>Any</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span >1</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>2</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>3</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>4</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>5</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>6</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>7</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>8+</span>
-                                            </div>
+                                            {RoomsAndBedNo.map((Num, index) => (
+                                                <button
+                                                    type="button"
+                                                    className="w-[80px] p-6 h-[30px] flex rounded-pill cursor-pointer border-2 justify-center items-center"
+                                                    key={index}
+                                                    onClick={() => handleBedroomsColor(index)}
+                                                    style={{
+                                                        backgroundColor: index === bedrooms.color ? "black" : "",
+                                                        color: index === bedrooms.color ? "white" : "",
+                                                    }}
+                                                >
+                                                    {Num.No}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
 
@@ -114,68 +290,41 @@ export default function Filter() {
                                     <div>
                                         <p className='text-xl mt-4 '>Bed</p>
                                         <div className='flex  lg:space-x-3 space-x-2  mt-3  removeScrollbar overflow-auto'>
-                                            <div className='w-[100px] p-6 h-[30px] border-black flex rounded-pill bg-black text-white border-2 justify-center items-center'>
-                                                <span className=''>Any</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span >1</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>2</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>3</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>4</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>5</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>6</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>7</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>8+</span>
-                                            </div>
+
+                                            {RoomsAndBedNo.map((Num, index) => (
+                                                <button
+                                                    type="button"
+                                                    className="w-[80px] p-6 h-[30px] flex rounded-pill cursor-pointer border-2 justify-center items-center"
+                                                    key={index}
+                                                    onClick={() => handleBedColor(index)}
+                                                    style={{
+                                                        backgroundColor: index === beds.color ? "black" : "",
+                                                        color: index === beds.color ? "white" : "",
+                                                    }}
+                                                >
+                                                    {Num.No}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
-
-
 
                                     <div className='mb-5'>
                                         <p className='text-xl mt-4  '>Bathrooms</p>
                                         <div className='flex  lg:space-x-3 space-x-2   mt-3 removeScrollbar overflow-auto'>
-                                            <div className='w-[100px] p-6 h-[30px] flex rounded-pill border-black bg-black text-white border-2 justify-center items-center'>
-                                                <span className=''>Any</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span >1</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>2</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>3</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>4</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>5</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>6</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>7</span>
-                                            </div>
-                                            <div className='w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center'>
-                                                <span className=''>8+</span>
-                                            </div>
+                                            {RoomsAndBedNo.map((Num, index) => (
+                                                <button
+                                                    type="button"
+                                                    className="w-[80px] p-6 h-[30px] flex rounded-pill border-2 justify-center items-center cursor-pointer"
+                                                    key={index}
+                                                    onClick={() => handleBathroomColor(index)}
+                                                    style={{
+                                                        backgroundColor: index === bathrooms.color ? "black" : "",
+                                                        color: index === bathrooms.color ? "white" : "",
+                                                    }}
+                                                >
+                                                    {Num.No}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
                                     <hr />
@@ -183,16 +332,39 @@ export default function Filter() {
                                 <div className='p-4 '>
                                     <h3 className='text-2xl inline-block font-medium'>Property type</h3>
                                     <div className=' flex gap-4  mt-4 inline-block  removeScrollbar overflow-auto '>
-                                        <div className='w-[220px] h-[150px] border-2 rounded-xl p-4 '>
+                                        <div
+                                            id="House"
+                                            className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl p-4   ${PlaceDescription == "House" && "border-white"
+                                                }`}
+                                            onClick={handlePlaceDescriptionFilter} >
+
+                                            <BsHouse className='block' fontSize={30} />
+                                            <span className='block mt-12 text-xl'>House</span>
+                                        </div>
+                                        <div
+                                            id="Cabin"
+                                            className={`w-[220px] h-[150px] cursor-pointer border-2 rounded-xl p-4
+                                             ${PlaceDescription == "Cabin" && "border-white"
+                                                }`}
+                                            onClick={handlePlaceDescriptionFilter} >
                                             <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
-                                            <span className='block mt-12 text-xl'>House</span></div>
-                                        <div className='w-[220px] h-[150px] border-2 rounded-xl p-4 '>
+                                            <span className='block mt-12 text-xl'>Cabin</span>
+                                        </div>
+                                        <div
+                                            id="Lake"
+                                            className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl cursor-pointer p-4
+                                          ${PlaceDescription == "Lake" && "border-white"
+                                                }`}
+                                            onClick={handlePlaceDescriptionFilter}>
                                             <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
-                                            <span className='block mt-12 text-xl'>Cabin</span></div>
-                                        <div className='w-[220px] h-[150px] border-2 rounded-xl p-4 '>
-                                            <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
-                                            <span className='block mt-12 text-xl'>Lake</span></div>
-                                        <div className='w-[220px] h-[150px] border-2 rounded-xl p-4 mb-5'>
+                                            <span className='block mt-12 text-xl'>Lake</span>
+                                        </div>
+                                        <div
+                                            id="Castle"
+                                            className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl p-4 mb-5
+                                      ${PlaceDescription == "Castle" && "border-white"
+                                                }`}
+                                            onClick={handlePlaceDescriptionFilter}>
                                             <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
                                             <span className='block mt-12 text-xl'>Castle</span></div>
                                     </div>
@@ -205,30 +377,30 @@ export default function Filter() {
                                     <h4 className='text-xl mt-3'>Essentials</h4>
                                     <div className='flex flex-wrap lg:no-wrap gap-y-5 items-center mt-3 lg:gap-40 mb-5'>
                                         <div className=' space-y-9  '>
-                                            <div className='flex item-center gap-3 '>
+                                            <div className='flex item-center gap-3 cursor-pointer '>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Wifi</label>
                                             </div>
-                                            <div className='flex item-center gap-3'>
+                                            <div className='flex item-center gap-3 cursor-pointer'>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Washer</label>
                                             </div>
-                                            <div className='flex item-center w-full  gap-3'>
+                                            <div className='flex item-center w-full cursor-pointer gap-3'>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Air connditioning</label>
                                             </div>
                                         </div>
 
                                         <div className='space-y-9 '>
-                                            <div className='flex item-center gap-3'>
+                                            <div className='flex item-center gap-3 cursor-pointer'>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Kitchen</label>
                                             </div>
-                                            <div className='flex item-center gap-3'>
+                                            <div className='flex item-center gap-3 cursor-pointer'>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Dryer</label>
                                             </div>
-                                            <div className='flex item-center gap-3'>
+                                            <div className='flex item-center gap-3 cursor-pointer'>
                                                 <input type="checkbox" className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Heating</label>
                                             </div>
@@ -243,24 +415,37 @@ export default function Filter() {
                                     <div className=' text-xl'>
                                         <p>Entire place</p>
                                         <div className='flex justify-between  '>
-                                            <p className='text-sm'>A place to yourself </p>
-                                            <input type="checkbox" className='w-7 h-7 flex-shrink-0' />
+                                            <label htmlFor="An entire place" className='text-sm'>A place to yourself</label>
+                                            <input type="checkbox"
+                                                className='cursor-pointer'
+                                                id="An entire place"
+                                                checked={TypeOfPlace == "An entire place" ? true : false}
+                                                onChange={handleTypeOfPlaceFilter}
+                                            />
 
                                         </div>
                                     </div>
                                     <div className=' text-xl ' >
                                         <p>Private room</p>
                                         <div className='flex justify-between flex-shrink-0'>
-                                            <p className='text-sm  '> Your own room in a home or a hotel, plus some shared common spaces</p>
-                                            <input type="checkbox" className='w-7 h-7 flex-shrink-0' />
+                                            <label htmlFor="A private room" className='text-sm'>Your own room in a home or a hotel, plus some shared common spaces</label>
+                                            <input type="checkbox"
+                                                className='cursor-pointer'
+                                                id="A private room"
+                                                checked={TypeOfPlace == "A private room" ? true : false}
+                                                onChange={handleTypeOfPlaceFilter} />
 
                                         </div>
                                     </div>
                                     <div className='mb-5 text-xl'>
                                         <p>shared room</p>
                                         <div className='flex justify-between flex-shrink-0 '>
-                                            <p className='text-sm'>A sleeping space and common areas that may be shared with others</p>
-                                            <input type="checkbox" className='w-7 h-7 flex-shrink-0' />
+                                            <label htmlFor="A shared room" className='text-sm'>A sleeping space and common areas that may be shared with others</label>
+                                            <input type="checkbox"
+                                                id='A shared room'
+                                                checked={TypeOfPlace == "A shared room" ? true : false}
+                                                onChange={handleTypeOfPlaceFilter}
+                                                className='w-7 h-7 flex-shrink-0 cursor-pointer' />
                                         </div>
                                     </div>
                                     <hr />
@@ -274,19 +459,19 @@ export default function Filter() {
                                         <div className=' space-y-9 w-full'>
                                             <div className='flex item-center  justify-between'>
                                                 <label htmlFor="">English</label>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox" className='w-7 h-7 cursor-pointer' />
                                             </div>
                                             <div className='flex item-center justify-between'>
                                                 <label htmlFor="" >French</label>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox" className='w-7 h-7 cursor-pointer' />
                                             </div>
                                             <div className='flex item-center justify-between'>
                                                 <label htmlFor="">Spanish</label>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox" className='w-7 h-7 cursor-pointer' />
                                             </div>
                                             <div className='flex item-center justify-between'>
                                                 <label htmlFor="">Germany</label>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox" className='w-7 h-7 cursor-pointer' />
                                             </div>
                                         </div>
                                     </div>
