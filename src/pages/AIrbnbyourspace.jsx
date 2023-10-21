@@ -26,20 +26,23 @@ function AirbnbYourHome(props) {
         }
     };
 
-
+    const handleHome = () => {
+        navigate("/");
+        location.reload()
+    }
     const navigateToBecomeAHost = () => {
         setShowSignup(true)
     }
 
     return (
-        <section >
+        <section className='' >
 
 
-            <nav className="d-flex justify-between items-center bg-[#ffffff] fixed pt-3 w-full px-32">
-                <div className="h-[40px] w-[40px]">
+            <nav className="d-flex lg:justify-between px-4 bg-[#ffffff] fixed pt-3 w-full lg:px-32">
+                <div className="h-[40px] w-[40px] cursor-pointer" onClick={handleHome}>
                     <svg><path style={{ fill: "rgb(255,56,92)" }} d={AirbnbLogoPath}></path></svg>
                 </div>
-                <div className="d-flex items-center ahmbtncase">
+                <div className="lg:flex lg:items-center  ahmbtncase  hidden lg:block">
                     <h4 style={{ marginRight: "30px", fontSize: "16px" }}>Ready to Airbnb it?</h4>
                     <button className='d-flex justify-content-center align-items-center p-3 '>
                         <FontAwesomeIcon style={{ marginRight: "5px", fontSize: "26px" }} icon={faHome} />
@@ -58,18 +61,19 @@ function AirbnbYourHome(props) {
                 showRegister && <Register />
             }
 
-            <div className='pt-40 flex items-center px-32' >
-                <div className='w-2/4 px-[161px] '>
-                    <div className='flex flex-wrap justify-center gap-3 '>
+            <div className='lg:pt-32 pt-20 flex lg:flex-nowrap flex-wrap lg:gap-9 items-center justify-center lg:px-32' >
+                <div className='lg:w-[400px]  ml-12  '>
+                    <div className='flex flex-wrap    justify-center gap-3  lg:pl-10 '>
                         <h2 className='text-[50px] text-[#df1561]'>Airbnb it.</h2>
                         <h2 className='text-[50px] font-bold'>You could earn</h2>
                         <h2 className='text-[50px]'>${range}</h2>
+                        <br />
                         <p> {numberOfNights} nights at an estimated $64 a night</p>
                         <input type="range" min={64} max={1920} step={64} className='w-[300px]' name="" value={range} id="" onChange={onEarning} />
                         <h3><Link className='underline hover:text-[black]'>Learn how we estimate your earnings</Link></h3>
 
                     </div>
-                    <div className='cursor-pointer border rounded-full w-[400px] p-3 mt-4 h-[55px] flex items-center'>
+                    <div className='cursor-pointer border rounded-full form-control  mt-4 flex items-center '>
                         <FontAwesomeIcon color='#df1561' icon={faSearch}></FontAwesomeIcon>
                         <div className='ml-3'>
                             <h4>Map area</h4>
@@ -78,7 +82,7 @@ function AirbnbYourHome(props) {
                     </div>
                     <button></button>
                 </div>
-                <div className=''>
+                <div className='mt-3 lg:mt-0 ml-20'>
                     {
                         <MyComponent />
                     }
@@ -91,16 +95,16 @@ function AirbnbYourHome(props) {
             </div>
 
 
-            <div className='flex gap-10  mb-9  px-32'>
-                <div className='w-1/3 pr-4 '>
+            <div className='flex flex-wrap lg:flex-nowrap gap-10  mb-9  lg:px-32 p-3'>
+                <div className='lg:w-1/3 pr-4 w-full text-justify '>
                     <p className='font-bold'>One-to-one guidance from a Superhost</p>
                     <p>We'll match you with a Superhost in your area, who'll guide you from your first question to your first guest - by phone, video call or chat.</p>
                 </div>
-                <div className='w-1/3'>
+                <div className='lg:w-1/3 w-full text-justify'>
                     <p className='font-bold'>An experienced guest for your first booking</p>
                     <p>For your first booking, you can choose to welcome an experienced guest who has at least three stays and a good track record on Airbnb.</p>
                 </div>
-                <div className='w-1/3'>
+                <div className='lg:w-1/3 text-justify w-full'>
                     <p className='font-bold'>Specialised support from Airbnb</p>
                     <p>New Hosts get one-tap access to specially trained Community Support agents who can help with everything from account issues to billing support.</p>
                 </div>

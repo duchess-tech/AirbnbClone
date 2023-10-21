@@ -25,6 +25,7 @@ body::-webkit-scrollbar {
 
 
 .ahmbtncase>button {
+  display: none;
   width: 200px;
   border: 0;
   padding: 0.5em;

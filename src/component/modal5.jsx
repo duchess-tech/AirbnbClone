@@ -13,15 +13,14 @@ export default function LoginOrSignup(props) {
     const cancelButtonRef = useRef(null)
     const { Loggedin } = useContext(Context)
     const navigate = useNavigate()
-
     const onClose = () => {
         setOpen(false)
     }
     const handleLogOut = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("loggedIn");
-        navigate("/")
-
+        navigate("/");
+        location.reload()
         // localStorage.removeItem("propertyId");
     };
 
@@ -31,7 +30,7 @@ export default function LoginOrSignup(props) {
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={onClose}>
 
 
-                <div className="fixed inset-0 right-4 top-28 flex justify-center 2xl:justify-end ">
+                <div className="fixed inset-0 lg:right-4 lg:top-12 top-52 flex lg:justify-end  justify-center">
                     <div className=" w-[300px]  sm:p-0">
                         <Transition.Child
                             as={Fragment}
@@ -63,13 +62,13 @@ export default function LoginOrSignup(props) {
                             </Dialog.Panel> : <Dialog.Panel className="relative transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="shadow  bg-white rounded-xl border-2 ">
                                     <div className="p-3 ">
-                                        <h3 className="text-md mt-2 cursor-pointer" onClick={togglePopuptrue} >Log in</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer" onClick={togglePopuptrue}  >Sign in</h3>
+                                        <h3 className="text-sm mt-2 cursor-pointer" onClick={togglePopuptrue} >Log in</h3>
+                                        <h3 className="text-sm mt-3  cursor-pointer" onClick={togglePopuptrue}  >Sign in</h3>
                                     </div>
                                     <hr />
                                     <div className="p-3 ">
-                                        <h3 className="text-md mt-2  cursor-pointer ">Airbnb your home</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer">Help</h3>
+                                        <h3 className="text-sm mt-2  cursor-pointer ">Airbnb your home</h3>
+                                        <h3 className="text-sm mt-3  cursor-pointer">Help</h3>
                                     </div>
 
                                 </div>

@@ -23,11 +23,11 @@ export default function Filter() {
                     leaveTo="opacity-0"
 
                 >
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    <div className="fixed inset-0 bg-gray-500  bg-opacity-75 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed  inset-0 z-10 w-screen overflow-y-auto">
-                    <div className="flex min-h-full  scroll  items-end justify-center p-4  sm:items-center sm:p-0">
+                <div className="fixed  inset-0 z-10 w-screen top-0 overflow-y-auto">
+                    <div className="flex min-h-full p-0 items-end justify-center p-4  sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -38,8 +38,8 @@ export default function Filter() {
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             {/* shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg */}
-                            <Dialog.Panel className="relative   overflow-y-auto lg:w-8/12 w-full  border-2  h-[500px]  bg-white  transform  rounded-lg transition-all ">
-                                <div className="relative">
+                            <Dialog.Panel className="relative   lg:overflow-y-auto overflow-y-auto lg:w-8/12 w-full  border-2 lg:h-[500px]  h-[800px] bg-white  transform  rounded-lg transition-all ">
+                                <div className="relative p-2">
                                     <div className='flex w-full justify-between  p-4'>
                                         <span><FontAwesomeIcon icon={faMultiply} size="xl" onClick={() => setOpen(false)} className='cursor-pointer font-thin' ref={cancelButtonRef} /></span>
                                         <Dialog.Title as="h3" className=" text-xl text-gray-900 ">

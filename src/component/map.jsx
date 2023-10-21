@@ -15,8 +15,8 @@ function MyComponent() {
 
     })
     const containerStyle = {
-        width: "670px",
-        height: "650px",
+        width: "500px",
+        height: "550px",
         borderRadius: "10px"
     }
     const center = useMemo(() => ({ lat, lng }), [lat, lng]);
