@@ -1,7 +1,6 @@
 .footer-case {
     /* display: flex; */
     justify-content: space-around;
-    /* padding: 25px; */
     background-color: rgb(247, 247, 247);
 }
 
@@ -19,6 +18,7 @@
     font-size: 14px;
     cursor: inherit;
 }
+
 
 .footer2nav {
     display: flex;

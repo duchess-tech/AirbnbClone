@@ -29,7 +29,7 @@ function Navbar(props) {
 
     return (
         <>
-            <div className="w-full lg:hidden block  flex p-2 gap-2 justify-center mt-3 items-center">
+            <div className="w-full lg:hidden block  flex p-2 gap-2 justify-center mt-9 lg:mt-3 items-center">
                 <div className=' flex gap-3  items-center  rounded-pill h-[55px] border-2 shadow-md w-4/5 '>
                     <FontAwesomeIcon icon={faSearch} size="xl" className="ml-4" />
                     <div className=" flex w-[150px]   flex-wrap">
@@ -96,8 +96,8 @@ function Navbar(props) {
 
 
 
-            <div className="lg:px-1 lg:flex  items-center lg:mt-4  text-[#666666]  ">
-                <div className="flex  py-2  lg:gap-2   removeScrollbar overflow-auto items-center  " >
+            <div className="lg:px-1 lg:flex   items-center lg:mt-4  text-[#666666]  ">
+                <div className="flex  py-9  lg:gap-2   removeScrollbar overflow-auto items-center  " >
 
                     <div className='nav-item cursor-pointer whitespace-nowrap hover:text-black' >
                         <img className='icon-img' src='/navimages/beds&breakfast.jpg'></img>

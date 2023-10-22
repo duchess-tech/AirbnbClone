@@ -8,7 +8,7 @@ function Navbar1() {
         location.reload()
     }
     return (
-        <nav className="d-flex justify-content-between  p-3 w-full h-20 fixed top-0 bg-[#ffffff]" >
+        <nav className="d-flex justify-content-between   p-3 w-full h-20 fixed top-0 bg-[#ffffff]" >
             <div className="hidden xl:block md:block lg:block 2xl:block cursor-pointer " onClick={handleHome}>
                 <svg className="logo1">
                     <path

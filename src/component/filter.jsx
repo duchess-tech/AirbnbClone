@@ -137,7 +137,7 @@ export default function Filter() {
             setAmenities([...Amenities, e.currentTarget.id]);
         } else {
             setAmenities([
-                ...Amenitiesmenities.filter((amenity) => amenity !== e.currentTarget.id),
+                ...Amenities.filter((amenity) => amenity !== e.currentTarget.id),
             ]);
         }
     }

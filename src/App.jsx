@@ -104,7 +104,7 @@ function Home() {
 
 
     return (
-        <div className="relative">
+        <div className="relative pb-20 lg:pb-0">
             {/* {modal && <Modal />} */}
 
             {/* mobile view */}
@@ -164,22 +164,22 @@ function Home() {
 
 
 
-            <div className=" flex justify-evenly  p-8 gap-x-8 gap-y-12  flex-wrap  animate-pop-up">
+            <div className=" flex justify-evenly mt-8 lg:mt-6  lg:p-8 lg:gap-x-8 lg:gap-y-12  p-3 flex-wrap gap-x-2 gap-y-20 animate-pop-up">
 
                 {Category.length > 0 &&
                     (shuffleArray(Category)?.map((items, index) =>
                     (
                         <div className="relative  animate-pop-up    rounded-xl" key={index}>
-                            <Carousel className=" rounded-xl lg:w-[260px] lg:h-[250px] w-full  h-[450px]  overflow-hidden"
+                            <Carousel className=" rounded-xl lg:w-[260px] lg:h-[250px] w-full h-[400px]   overflow-hidden"
                                 autoPlay
                                 transition={{ duration: 2 }}
                                 interval={1000}
                             >
-                                <div className="position-relative border " >
+                                <div className="position-relative  " >
                                     <img
                                         src={items?.photos[0]}
                                         alt="image 1"
-                                        className="h-[300px] w-full object-cover"
+                                        className="h-[400px] w-full object-cover"
                                     />
 
                                 </div>

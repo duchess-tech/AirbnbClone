@@ -4,7 +4,7 @@ import "../css/footer.css"
 
 function Footer() {
     return (
-        <div className="footer-case  flex  w-full">
+        <div className="footer-case   flex  w-full">
             <ul className="f1 p-4">
                 <li>Support</li>
                 <li>Help Center</li>
@@ -29,7 +29,7 @@ function Footer() {
                 <li>Airbnb-friendly apartments</li>
 
             </ul>
-            <ul className="f4 p-4">
+            <ul className="f4 p-4  ">
                 <li>Airbnb</li>
                 <li>Newsroom</li>
                 <li>Learn about new features</li>
