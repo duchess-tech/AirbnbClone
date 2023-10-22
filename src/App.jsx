@@ -170,7 +170,7 @@ function Home() {
                     (shuffleArray(Category)?.map((items, index) =>
                     (
                         <div className="relative  animate-pop-up    rounded-xl" key={index}>
-                            <Carousel className=" rounded-xl w-[260px] h-[250px]   overflow-hidden"
+                            <Carousel className=" rounded-xl lg:w-[260px] lg:h-[250px] w-full  h-[450px]  overflow-hidden"
                                 autoPlay
                                 transition={{ duration: 2 }}
                                 interval={1000}
@@ -221,6 +221,7 @@ function Home() {
                 }
                 {
                     Category.length <= 0 && !loading &&
+
 
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                         <strong className="font-bold mr-2">Omo ooo!!!</strong>

@@ -170,12 +170,11 @@ export default function Filter() {
     const handleClearAll = () => {
         setAmenity({
             wifi: false,
-            tv: false,
+            Airconditioning: false,
+            Washer: false,
+            Tv: false,
             kitchen: false,
-            washer: false,
-            airconditioning: false,
-            pool: false,
-            piano: false,
+            Pool: false,
         });
         setAmenities([]);
         setPlaceDescription("");
