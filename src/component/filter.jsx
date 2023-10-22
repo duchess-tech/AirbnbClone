@@ -7,19 +7,22 @@ import httpAuth from '../utils/http'
 import { BsBuildings, BsHouse, BsHouses } from "react-icons/bs";
 import { TbBuildingHospital } from "react-icons/tb";
 import { MdOutlineWarehouse } from "react-icons/md";
+import { Link } from '@mui/material'
 // import httpClient from "../Services/httpclient";
 export default function Filter() {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null)
     const [minPrice, setMinPrice] = useState(10)
     const [maxPrice, setMaxPrice] = useState(530)
-    const [TypeOfPlace, setTypeOfPlace] = useState("An entire place")
+    const [TypeOfPlace, setTypeOfPlace] = useState("")
     const [PlaceDescription, setPlaceDescription] = useState("");
     const [filterProp, setFilterProp] = useState([]);
     const [Amenities, setAmenities] = useState([])
     const [bedrooms, setBedrooms] = useState({ color: 0, qty: "" });
     const [beds, setBeds] = useState({ color: 0, qty: "" });
     const [bathrooms, setBathrooms] = useState({ color: 0, qty: "" });
+    const [amenity, setAmenity] = useState({ Wifi: false, Kitchen: false, Washer: false, AirConditioning: false, Pool: false, Tv: false });
+
     const [loading, setloading] = useState(false);
     let isMounted = true;
     const RoomsAndBedNo = [
@@ -94,7 +97,7 @@ export default function Filter() {
     ]);
 
     const handleTypeOfPlaceFilter = (e) => {
-        if (TypeOfPlaceFilter == e.currentTarget.id) {
+        if (TypeOfPlace == e.currentTarget.id) {
             setTypeOfPlace("");
             return;
         }
@@ -103,15 +106,15 @@ export default function Filter() {
     };
 
 
-
-
-
     const handlePlaceDescriptionFilter = (e) => {
         if (PlaceDescription == e.currentTarget.id) {
             setPlaceDescription("");
             return;
+
         }
         setPlaceDescription(e.currentTarget.id);
+        console.log("working")
+
     };
 
 
@@ -124,22 +127,20 @@ export default function Filter() {
 
 
 
-    // // filter Amenities
-    // const handleToggleAmenities = (e) => {
-    //     setamenity({
-    //         ...amenity,
-    //         [e.currentTarget.id]: !amenity[e.currentTarget.id],
-    //     });
+    const handleAmenities = (e) => {
+        setAmenity({
+            ...amenity,
+            [e.currentTarget.id]: !amenity[e.currentTarget.id],
+        });
 
-    //     if (!amenity[e.currentTarget.id]) {
-    //         setamenities([...amenities, e.currentTarget.id]);
-    //     } else {
-    //         setamenities([
-    //             ...amenities.filter((amenity) => amenity !== e.currentTarget.id),
-    //         ]);
-    //     }
-    // };
-
+        if (!amenity[e.currentTarget.id]) {
+            setAmenities([...Amenities, e.currentTarget.id]);
+        } else {
+            setAmenities([
+                ...Amenitiesmenities.filter((amenity) => amenity !== e.currentTarget.id),
+            ]);
+        }
+    }
 
     // // calculate average Price
     // useEffect(() => {
@@ -166,26 +167,25 @@ export default function Filter() {
     //     setFullscreen(false);
     // }
 
-    // // Clear All
-    // const handleClearAll = () => {
-    //     setamenity({
-    //         wifi: false,
-    //         tv: false,
-    //         kitchen: false,
-    //         washer: false,
-    //         airconditioning: false,
-    //         pool: false,
-    //         piano: false,
-    //     });
-    //     setamenities([]);
-    //     setprivacy("");
-    //     setstructure("");
-    //     setbathroom({ ...bathroom, color: 0, qty: "" });
-    //     setbedrooms({ ...bedrooms, color: 0, qty: "" });
-    //     setbed({ ...bed, color: 0, qty: "" });
-    //     setminprice(50);
-    //     setmaxprice(200);
-    // };
+    const handleClearAll = () => {
+        setAmenity({
+            wifi: false,
+            tv: false,
+            kitchen: false,
+            washer: false,
+            airconditioning: false,
+            pool: false,
+            piano: false,
+        });
+        setAmenities([]);
+        setPlaceDescription("");
+        setTypeOfPlace("");
+        setBathrooms({ ...bathrooms, color: 0, qty: "" });
+        setBedrooms({ ...bedrooms, color: 0, qty: "" });
+        setBeds({ ...beds, color: 0, qty: "" });
+        setMinPrice(50);
+        setMaxPrice(200);
+    };
 
 
 
@@ -247,7 +247,7 @@ export default function Filter() {
                                                 <h3>Minimum</h3>
                                                 <div className='flex'>
                                                     <p>$</p>
-                                                    <input defaultValue={minPrice} onChange={(e) => setMinPrice(e.target.value)} className='  focus:outline-none' />
+                                                    <input defaultValue={minPrice} onChange={(e) => { setMinPrice(e.target.value) }} className='  focus:outline-none' />
                                                 </div>
                                             </div>
                                             <div className='lg:w-[100px] w-2   flex justify-center items-center'><span className='text-2xl'>-</span></div>
@@ -334,38 +334,41 @@ export default function Filter() {
                                     <div className=' flex gap-4  mt-4 inline-block  removeScrollbar overflow-auto '>
                                         <div
                                             id="House"
-                                            className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl p-4   ${PlaceDescription == "House" && "border-white"
+                                            className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl p-4   ${PlaceDescription == "House" && "border-black"
                                                 }`}
                                             onClick={handlePlaceDescriptionFilter} >
+                                            <img className='w-[30px]' src='/navimages/manshions.jpg'></img>
 
-                                            <BsHouse className='block' fontSize={30} />
                                             <span className='block mt-12 text-xl'>House</span>
                                         </div>
                                         <div
                                             id="Cabin"
                                             className={`w-[220px] h-[150px] cursor-pointer border-2 rounded-xl p-4
-                                             ${PlaceDescription == "Cabin" && "border-white"
+                                             ${PlaceDescription == "Cabin" && "border-black"
                                                 }`}
                                             onClick={handlePlaceDescriptionFilter} >
-                                            <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
+
+                                            <img className='w-[30px]' src='/navimages/cabins.jpg'></img>
+
                                             <span className='block mt-12 text-xl'>Cabin</span>
                                         </div>
                                         <div
                                             id="Lake"
                                             className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl cursor-pointer p-4
-                                          ${PlaceDescription == "Lake" && "border-white"
+                                          ${PlaceDescription == "Lake" && "border-black"
                                                 }`}
                                             onClick={handlePlaceDescriptionFilter}>
-                                            <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
+                                            <img className='w-[30px]' src='/navimages/beachfont.jpg'></img>
+
                                             <span className='block mt-12 text-xl'>Lake</span>
                                         </div>
                                         <div
                                             id="Castle"
                                             className={`w-[220px] h-[150px] border-2 cursor-pointer rounded-xl p-4 mb-5
-                                      ${PlaceDescription == "Castle" && "border-white"
+                                      ${PlaceDescription == "Castle" && "border-black"
                                                 }`}
                                             onClick={handlePlaceDescriptionFilter}>
-                                            <FontAwesomeIcon icon={faHouse} size="2x" className='block' />
+                                            <img className='w-[30px]' src='/navimages/castles.jpg'></img>
                                             <span className='block mt-12 text-xl'>Castle</span></div>
                                     </div>
                                     <hr />
@@ -378,31 +381,55 @@ export default function Filter() {
                                     <div className='flex flex-wrap lg:no-wrap gap-y-5 items-center mt-3 lg:gap-40 mb-5'>
                                         <div className=' space-y-9  '>
                                             <div className='flex item-center gap-3 cursor-pointer '>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox"
+                                                    id="Wifi"
+                                                    checked={amenity.Wifi == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Wifi</label>
                                             </div>
                                             <div className='flex item-center gap-3 cursor-pointer'>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox"
+                                                    id="Washer"
+                                                    checked={amenity.Washer == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Washer</label>
                                             </div>
                                             <div className='flex item-center w-full cursor-pointer gap-3'>
-                                                <input type="checkbox" className='w-7 h-7' />
-                                                <label htmlFor="" className='text-xl'>Air connditioning</label>
+                                                <input type="checkbox"
+                                                    id="Washer"
+                                                    checked={amenity.AirConditioning == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
+                                                <label htmlFor="" className='text-xl'>AirConditioning</label>
                                             </div>
                                         </div>
 
                                         <div className='space-y-9 '>
                                             <div className='flex item-center gap-3 cursor-pointer'>
-                                                <input type="checkbox" className='w-7 h-7' />
+                                                <input type="checkbox"
+                                                    id="Kitchen"
+                                                    checked={amenity.Kitchen == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
                                                 <label htmlFor="" className='text-xl'>Kitchen</label>
                                             </div>
                                             <div className='flex item-center gap-3 cursor-pointer'>
-                                                <input type="checkbox" className='w-7 h-7' />
-                                                <label htmlFor="" className='text-xl'>Dryer</label>
+                                                <input type="checkbox"
+                                                    id="Pool"
+                                                    checked={amenity.Pool == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
+                                                <label htmlFor="" className='text-xl'>Pool</label>
                                             </div>
                                             <div className='flex item-center gap-3 cursor-pointer'>
-                                                <input type="checkbox" className='w-7 h-7' />
-                                                <label htmlFor="" className='text-xl'>Heating</label>
+                                                <input type="checkbox"
+                                                    id="Tv"
+                                                    checked={amenity.Tv == true ? true : false}
+                                                    onChange={handleAmenities}
+                                                    className='w-7 h-7' />
+                                                <label htmlFor="" className='text-xl'>Tv</label>
                                             </div>
                                         </div>
                                     </div>
@@ -414,10 +441,10 @@ export default function Filter() {
 
                                     <div className=' text-xl'>
                                         <p>Entire place</p>
-                                        <div className='flex justify-between  '>
+                                        <div className='flex justify-between flex-shrink-0 '>
                                             <label htmlFor="An entire place" className='text-sm'>A place to yourself</label>
                                             <input type="checkbox"
-                                                className='cursor-pointer'
+                                                className='w-7 h-7 flex-shrink-0 cursor-pointer'
                                                 id="An entire place"
                                                 checked={TypeOfPlace == "An entire place" ? true : false}
                                                 onChange={handleTypeOfPlaceFilter}
@@ -430,10 +457,10 @@ export default function Filter() {
                                         <div className='flex justify-between flex-shrink-0'>
                                             <label htmlFor="A private room" className='text-sm'>Your own room in a home or a hotel, plus some shared common spaces</label>
                                             <input type="checkbox"
-                                                className='cursor-pointer'
                                                 id="A private room"
                                                 checked={TypeOfPlace == "A private room" ? true : false}
-                                                onChange={handleTypeOfPlaceFilter} />
+                                                onChange={handleTypeOfPlaceFilter}
+                                                className='w-7 h-7 flex-shrink-0 cursor-pointer' />
 
                                         </div>
                                     </div>
@@ -476,16 +503,23 @@ export default function Filter() {
                                         </div>
                                     </div>
                                 </div>
-                                {/* 
-                                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6  absolute bottom-0  w-full">
-                                    <button></button>
+                                {/*    p-3 lg:hidden  text-center  */}
+                                <div className="bg-white  sticky  w-full bottom-0 flex items-center justify-between left-0 border-top p-4 ">
+
+                                    <Link onClick={handleClearAll}>
+                                        Clear all
+                                    </Link>
+
                                     <button
                                         type="button"
-                                        className="mt-3   inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                                        className=" w-[200px] p-2  rounded-md text-white text-sm bg-black "
                                     >
-                                        Cancel
+                                        Show {filterProp.length} places
                                     </button>
-                                </div> */}
+
+
+
+                                </div>
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>

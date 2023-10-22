@@ -12,10 +12,8 @@ import ConfirmEmail from "./component/modal3";
 import shuffleArray from "./utils/shuffledata";
 import Register from "./component/modal4";
 import Skeleton from '@mui/material/Skeleton';
-
-
-import { UserIcon, HeartIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/solid';
-import { BiChat, BiEnvelope, BiHeart, BiMessage, BiMessageAdd, BiUserCircle } from "react-icons/bi";
+import { SearchIcon } from '@heroicons/react/solid';
+import { BiHeart, BiMessage, BiUserCircle } from "react-icons/bi";
 
 
 
@@ -79,7 +77,6 @@ function Home() {
                         setIsActive(true);
                     }, 100);
                 }
-
                 // localStorage.setItem("loggedIn", JSON.stringify(true));
             }
             catch (error) {
@@ -172,7 +169,7 @@ function Home() {
                 {Category.length > 0 &&
                     (shuffleArray(Category)?.map((items, index) =>
                     (
-                        <div style={slideInStyles} className="relative  animate-pop-up    rounded-xl" key={index}>
+                        <div className="relative  animate-pop-up    rounded-xl" key={index}>
                             <Carousel className=" rounded-xl w-[260px] h-[250px]   overflow-hidden"
                                 autoPlay
                                 transition={{ duration: 2 }}
@@ -225,11 +222,8 @@ function Home() {
                 {
                     Category.length <= 0 && !loading &&
 
-
-
-
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <strong className="font-bold">Omo ooo!!!</strong>
+                        <strong className="font-bold mr-2">Omo ooo!!!</strong>
                         <span className="block sm:inline">Properties of the selected category cant be found</span>
 
                     </div>
