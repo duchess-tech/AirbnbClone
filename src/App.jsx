@@ -187,7 +187,7 @@ function Home() {
                                     <img
                                         src={items?.photos[1]}
                                         alt="image 2"
-                                        className="h-[300px] w-full object-cover"
+                                        className="h-[400px] w-full object-cover"
                                     />
 
                                 </div>
@@ -195,7 +195,7 @@ function Home() {
                                     <img
                                         src={items?.photos[3]}
                                         alt="image 3"
-                                        className="h-[300px] w-full object-cover"
+                                        className="h-[400px] w-full object-cover"
                                     />
 
                                 </div>
