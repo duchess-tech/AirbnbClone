@@ -92,7 +92,7 @@ export default function Register() {
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 z-10    w-screen">
+                <div className="fixed inset-0 z-10   w-screen">
                     <div className="flex min-h-full items-end justify-center mt-12 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
@@ -103,8 +103,8 @@ export default function Register() {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                <form onSubmit={createUser} className=" w-[600px]     bg-[#ffffff] h-[650px]   rounded-xl">
+                            <Dialog.Panel className="relative transform bg-white  rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                <form onSubmit={createUser} className=" w-[600px]  top-10    bg-[#ffffff] h-[650px]   rounded-xl">
                                     <div className="flex justify-between p-3">
                                         <FontAwesomeIcon icon={faLessThan} onClick={backToConfirmEmail} />
                                         <h3 className="">Finish signing up</h3>

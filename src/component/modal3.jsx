@@ -77,7 +77,7 @@ export default function ConfirmEmail() {
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -88,7 +88,7 @@ export default function ConfirmEmail() {
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             <Dialog.Panel className="relative transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                <div className=" cursor-pointer w-[500px]  bg-[#ffffff] h-[350px] border-2 rounded-xl p-3" >
+                                <div className=" cursor-pointer lg:w-[500px]  bg-[#ffffff] h-[350px]  rounded-xl p-3" >
 
                                     <div className="flex  justify-between mt-3 mb-9">
                                         <FontAwesomeIcon icon={faLessThan} onClick={backTologin} />
@@ -102,7 +102,7 @@ export default function ConfirmEmail() {
                                         <p className="text-danger">{otperror}</p>
 
                                     </div>
-                                    <button className="mt-10 bg-[#dc3545] text-lg w-[150px] p-2 text-white" onClick={verifyEMail}>{loading ? <span className="spinner-border text-white"></span> : "Continue"}</button>
+                                    <button className="mt-10 bg-[#dc3545] rounded-lg text-lg w-[150px] p-2 text-white" onClick={verifyEMail}>{loading ? <span className="spinner-border text-white"></span> : "Continue"}</button>
 
                                 </div>
 

@@ -6,7 +6,6 @@ import { FaApple, FaEnvelope } from 'react-icons/fa'
 import { FacebookIcon } from 'react-share'
 import { faMultiply } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
-import { useGoogleLogin } from "@react-oauth/google";
 import { Context } from '../provider/context'
 import { useContext } from 'react'
 
@@ -68,23 +67,7 @@ export default function SignupModal(props) {
 
 
 
-    // const GoogleLogin = useGoogleLogin({
-    //     onSuccess: async (response) => {
-    //       const token = response.access_token;
-    //       try {
-    //         const res = await httpClient.post("/Oauth/google", { token });
-    //         handleSaveToken(res.data.token);
-    //         setModalShow(false);
-    //         handleSaveUser(res.data.user);
-    //         setLogin(res.data.user);
-    //         setauthloading(false);
-    //         navigate(Location.pathname);
-    //         location.reload();
-    //       } catch (error) {
-    //         console.log(error);
-    //       }
-    //     },
-    //   });
+
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -101,7 +84,7 @@ export default function SignupModal(props) {
                     <div className="fixed  inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 z-10 w-screen   ">
+                <div className="fixed inset-0 top-0 z-10 w-screen p-4 lg:p-0  ">
                     <div className="flex  justify-center  text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
@@ -112,7 +95,7 @@ export default function SignupModal(props) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative  justify-center transform overflow-auto removeScrollbar lg:w-9/12    lg:h-[500px] bg-white rounded-lg  shadow-xl transition-all    sm:my-8 sm:w-full sm:max-w-lg">
+                            <Dialog.Panel className="relative  justify-center  lg:p-0 transform overflow-auto removeScrollbar lg:w-9/12 h-[620px]   lg:h-[500px] bg-white rounded-lg  shadow-xl transition-all    sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="flex sticky top-0  lg:w-full bg-white p-3 left-0 font-bold justify-center   lg:justify-start lg:gap-32">
                                     <FontAwesomeIcon icon={faMultiply} onClick={Cancel}
                                         ref={cancelButtonRef} className=" cursor-pointer lg:block hidden" />

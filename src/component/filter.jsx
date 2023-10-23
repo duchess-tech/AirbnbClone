@@ -1,15 +1,13 @@
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faMultiply } from '@fortawesome/free-solid-svg-icons'
+import { faMultiply } from '@fortawesome/free-solid-svg-icons'
 import httpAuth from '../utils/http'
-import { BsBuildings, BsHouse, BsHouses } from "react-icons/bs";
-import { TbBuildingHospital } from "react-icons/tb";
-import { MdOutlineWarehouse } from "react-icons/md";
 import { Link } from '@mui/material'
-// import httpClient from "../Services/httpclient";
+import { Context } from '../provider/context'
 export default function Filter() {
+    const { setCategory, setPopupFilter } = useContext(Context)
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null)
     const [minPrice, setMinPrice] = useState(10)
@@ -120,18 +118,11 @@ export default function Filter() {
 
 
 
-    // const { setFilterShow, setFullscreen, setProperty, property } =
-    //     useContext(Context);
-    // const [avgprice, setavgprice] = useState(0);
-    // const [amenity, setAmenity] = useState({ wifi: false, tv: false, kitchen: false, washer: false, airconditioning: false, pool: false, piano: false });
 
 
 
     const handleAmenities = (e) => {
-        setAmenity({
-            ...amenity,
-            [e.currentTarget.id]: !amenity[e.currentTarget.id],
-        });
+        setAmenity({ ...amenity, [e.currentTarget.id]: !amenity[e.currentTarget.id], });
 
         if (!amenity[e.currentTarget.id]) {
             setAmenities([...Amenities, e.currentTarget.id]);
@@ -142,7 +133,8 @@ export default function Filter() {
         }
     }
 
-    // // calculate average Price
+
+    // //  average Price
     // useEffect(() => {
     //     let totalPrice = property
     //         .map((prop) => prop.price)
@@ -152,20 +144,14 @@ export default function Filter() {
     //     setavgprice(Math.round(totalPrice / property.length));
     // });
 
-    // fetch properties
+    // const [avgprice, setavgprice] = useState(0);
 
 
-    // //submit filter
-    // const handleSubmitFilter = () => {
-    //     setProperty(filterProp);
-    //     hideFilter();
-    // };
+    const handleShowFilterProps = async () => {
+        await setCategory(filterProp);
+        setPopupFilter(false)
+    };
 
-    // //hide filter
-    // function hideFilter() {
-    //     setFilterShow(false);
-    //     setFullscreen(false);
-    // }
 
     const handleClearAll = () => {
         setAmenity({
@@ -187,18 +173,6 @@ export default function Filter() {
     };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -215,8 +189,8 @@ export default function Filter() {
                     <div className="fixed inset-0 bg-gray-500  bg-opacity-75 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed  inset-0 z-10 w-screen top-0 overflow-y-auto">
-                    <div className="flex min-h-full p-0 items-end justify-center p-4  sm:items-center sm:p-0">
+                <div className="fixed  inset-0 z-10 w-screen  overflow-y-auto">
+                    <div className="flex min-h-full p-0  justify-center p-4  sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -227,7 +201,7 @@ export default function Filter() {
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             {/* shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg */}
-                            <Dialog.Panel className="relative   lg:overflow-y-auto overflow-y-auto lg:w-8/12 w-full  border-2 lg:h-[500px]  h-[800px] bg-white  transform  rounded-lg transition-all ">
+                            <Dialog.Panel className="relative   lg:overflow-y-auto overflow-y-auto h-[600px] lg:w-8/12 w-full h-[300px]   lg:h-[500px]  bg-white  transform  rounded-lg transition-all ">
                                 <div className="relative p-2">
                                     <div className='flex w-full justify-between  p-4'>
                                         <span><FontAwesomeIcon icon={faMultiply} size="xl" onClick={() => setOpen(false)} className='cursor-pointer font-thin' ref={cancelButtonRef} /></span>
@@ -241,7 +215,7 @@ export default function Filter() {
 
                                     <div className='mt-4 p-4 '>
                                         <h4 className='lg:text-3xl text-2xl font-medium'>Price </h4>
-                                        <div className='flex justify-center mb-5 mt-3   '>
+                                        <div className='flex justify-center mb-5 mt-3  '>
                                             <div className='lg:w-[350px] w-40 rounded-xl border-2  p-2'>
                                                 <h3>Minimum</h3>
                                                 <div className='flex'>
@@ -379,12 +353,12 @@ export default function Filter() {
                                     <h4 className='text-xl mt-3'>Essentials</h4>
                                     <div className='flex flex-wrap lg:no-wrap gap-y-5 items-center mt-3 lg:gap-40 mb-5'>
                                         <div className=' space-y-9  '>
-                                            <div className='flex item-center gap-3 cursor-pointer '>
+                                            <div className='flex item-center gap-3 '>
                                                 <input type="checkbox"
                                                     id="Wifi"
                                                     checked={amenity.Wifi == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>Wifi</label>
                                             </div>
                                             <div className='flex item-center gap-3 cursor-pointer'>
@@ -392,42 +366,42 @@ export default function Filter() {
                                                     id="Washer"
                                                     checked={amenity.Washer == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>Washer</label>
                                             </div>
-                                            <div className='flex item-center w-full cursor-pointer gap-3'>
+                                            <div className='flex item-center w-full  gap-3'>
                                                 <input type="checkbox"
                                                     id="Washer"
                                                     checked={amenity.AirConditioning == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>AirConditioning</label>
                                             </div>
                                         </div>
 
                                         <div className='space-y-9 '>
-                                            <div className='flex item-center gap-3 cursor-pointer'>
+                                            <div className='flex item-center gap-3 '>
                                                 <input type="checkbox"
                                                     id="Kitchen"
                                                     checked={amenity.Kitchen == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>Kitchen</label>
                                             </div>
-                                            <div className='flex item-center gap-3 cursor-pointer'>
+                                            <div className='flex item-center gap-3 '>
                                                 <input type="checkbox"
                                                     id="Pool"
                                                     checked={amenity.Pool == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>Pool</label>
                                             </div>
-                                            <div className='flex item-center gap-3 cursor-pointer'>
+                                            <div className='flex item-center gap-3 '>
                                                 <input type="checkbox"
                                                     id="Tv"
                                                     checked={amenity.Tv == true ? true : false}
                                                     onChange={handleAmenities}
-                                                    className='w-7 h-7' />
+                                                    className='w-7 h-7 cursor-pointer' />
                                                 <label htmlFor="" className='text-xl'>Tv</label>
                                             </div>
                                         </div>
@@ -502,18 +476,18 @@ export default function Filter() {
                                         </div>
                                     </div>
                                 </div>
-                                {/*    p-3 lg:hidden  text-center  */}
-                                <div className="bg-white  sticky  w-full bottom-0 flex items-center justify-between left-0 border-top p-4 ">
+                                <div className="bg-white  cursor-pointer sticky  w-full bottom-0 flex items-center justify-between left-0 border-top p-4 ">
 
-                                    <Link onClick={handleClearAll}>
+                                    <Link className='text-black' onClick={handleClearAll}>
                                         Clear all
                                     </Link>
 
                                     <button
+                                        onClick={handleShowFilterProps}
                                         type="button"
                                         className=" w-[200px] p-2  rounded-md text-white text-sm bg-black "
                                     >
-                                        Show {filterProp.length} places
+                                        {loading ? <span className='spinner-border'></span> : ` Show ${filterProp.length} places`}
                                     </button>
 
 

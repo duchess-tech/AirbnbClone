@@ -30,45 +30,45 @@ export default function LoginOrSignup(props) {
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={onClose}>
 
 
-                <div className="fixed inset-0 lg:right-4 lg:top-12 top-52 flex lg:justify-end  justify-center">
+                <div className="fixed inset-0 lg:right-4 lg:top-12 top-32 flex lg:justify-end  justify-center">
                     <div className=" w-[300px]  sm:p-0">
                         <Transition.Child
                             as={Fragment}
 
                         >
-                            {Loggedin ? < Dialog.Panel className="relative transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            {Loggedin ? < Dialog.Panel className="relative transform bg-white text-[#666666] rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="shadow  bg-white rounded-xl border-2 ">
-                                    <div className="p-3 ">
-                                        <h3 className="text-md mt-2 cursor-pointer" >Message</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer"  >Trips</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer"  >Wishlist</h3>
+                                    <div>
+                                        <h3 className="text-md mt-2 p-2 hover:bg-[#F7F4F4] hover:text-black cursor-pointer" >Message</h3>
+                                        <h3 className="text-md mt-3 p-2 hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer"  >Trips</h3>
+                                        <h3 className="text-md mt-3 p-2  hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer"  >Wishlist</h3>
                                     </div>
                                     <hr />
-                                    <div className="p-3 ">
-                                        <h3 className="text-md mt-2 cursor-pointer" >Manage Listings</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer"  >Manage experiences</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer"  >Account</h3>
+                                    <div>
+                                        <h3 className="text-md mt-2 p-2 hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer" >Manage Listings</h3>
+                                        <h3 className="text-md mt-3 p-2 hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer"  >Manage experiences</h3>
+                                        <h3 className="text-md mt-3 p-2  hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer"  >Account</h3>
                                     </div>
                                     <hr />
 
-                                    <div className="p-3 ">
-                                        <h3 className="text-md mt-2  cursor-pointer ">Help</h3>
-                                        <h3 className="text-md mt-3  cursor-pointer" onClick={handleLogOut}>Logout</h3>
+                                    <div>
+                                        <h3 className="text-md mt-2 p-2 hover:bg-[#F7F4F4]  hover:text-black   cursor-pointer ">Help</h3>
+                                        <h3 className="text-md mt-3 p-2  hover:bg-[#F7F4F4]  hover:text-black   cursor-pointer" onClick={handleLogOut}>Logout</h3>
                                     </div>
 
                                 </div>
 
 
-                            </Dialog.Panel> : <Dialog.Panel className="relative transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            </Dialog.Panel> : <Dialog.Panel className="relative text-[#666666] transform bg-white rounded-lg  shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="shadow  bg-white rounded-xl border-2 ">
-                                    <div className="p-3 ">
-                                        <h3 className="text-sm mt-2 cursor-pointer" onClick={togglePopuptrue} >Log in</h3>
-                                        <h3 className="text-sm mt-3  cursor-pointer" onClick={togglePopuptrue}  >Sign in</h3>
+                                    <div >
+                                        <h3 className="text-sm mt-2 p-2  hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer" onClick={togglePopuptrue} >Log in</h3>
+                                        <h3 className="text-sm mt-3 p-2   hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer" onClick={togglePopuptrue}  >Sign in</h3>
                                     </div>
                                     <hr />
-                                    <div className="p-3 ">
-                                        <h3 className="text-sm mt-2  cursor-pointer ">Airbnb your home</h3>
-                                        <h3 className="text-sm mt-3  cursor-pointer">Help</h3>
+                                    <div>
+                                        <h3 className="text-sm mt-2 p-2  hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer ">Airbnb your home</h3>
+                                        <h3 className="text-sm mt-3 p-2  hover:bg-[#F7F4F4]  hover:text-black  cursor-pointer">Help</h3>
                                     </div>
 
                                 </div>

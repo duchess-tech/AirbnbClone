@@ -13,6 +13,7 @@ const ContextProvider = ({ children }) => {
   const [showEmailOtp, setShowEmailOtp] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
   const [loading, setloading] = useState(false)
+  const [popupFilter, setPopupFilter] = useState(false)
   const [shouldNavigate, setshouldNavigate] = useState(false)
   const [propertyId, setpropertyId] = useState(
     localStorage.getItem("propertyid")
@@ -78,7 +79,9 @@ const ContextProvider = ({ children }) => {
     showPopup,
     setShowPopup,
     shouldNavigate,
-    setshouldNavigate
+    setshouldNavigate,
+    popupFilter,
+    setPopupFilter
 
   };
 

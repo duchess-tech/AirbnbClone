@@ -11,16 +11,14 @@ import SignupModal from "./component/modal2";
 import ConfirmEmail from "./component/modal3";
 import shuffleArray from "./utils/shuffledata";
 import Register from "./component/modal4";
-import Skeleton from '@mui/material/Skeleton';
 import { SearchIcon } from '@heroicons/react/solid';
 import { BiHeart, BiMessage, BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 
 
 function Home() {
-    const { showLogin, showEmailOtp, showRegister, Loggedin, togglePopup } = useContext(Context)
-    const [properties, setProperties] = useState([])
-    const [Category, setCategory] = useState([])
+    const { showLogin, showEmailOtp, showRegister, Loggedin, togglePopup, Category, setCategory } = useContext(Context)
     const [loading, setloading] = useState(false)
     const [modal, setModal] = useState("true")
     const [isActive, setIsActive] = useState(false);
@@ -95,11 +93,11 @@ function Home() {
         };
     }, []);
 
-    const slideInStyles = {
-        position: 'relative',
-        left: isActive ? '0px' : '-100%',
-        transition: 'left 2s ease-in'
-    };
+    // const slideInStyles = {
+    //     position: 'relative',
+    //     left: isActive ? '0px' : '-100%',
+    //     transition: 'left 2s ease-in'
+    // };
 
 
 
@@ -108,27 +106,29 @@ function Home() {
             {/* {modal && <Modal />} */}
 
             {/* mobile view */}
-            {<div className="fixed bottom-0 left-0 w-full bg-white p-3 lg:hidden  text-center z-10">
+            {<div className="fixed bottom-0 left-0 w-full  bg-white p-3 lg:hidden  text-center z-10">
                 <div className="flex justify-center gap-6">
-                    <div className="flex flex-col items-center cursor-pointer ">
+                    <Link to={"/"} className="flex flex-col  text-black  items-center cursor-pointer " >
                         <SearchIcon className="h-8 w-8 mb-1" color="#b4b4b4" />
                         <span>Explore</span>
-                    </div>
-                    <div className="flex flex-col items-center cursor-pointer">
+                    </Link >
+
+
+                    <Link className="flex flex-col  text-black items-center cursor-pointer">
                         <BiHeart className="h-8 w-8 mb-1" color="#b4b4b4" />
                         <span>Wishlist</span>
-                    </div>
+                    </Link>
 
                     {!Loggedin &&
 
-                        <div className="flex flex-col items-center cursor-pointer" onClick={togglePopup}>
+                        <Link className="flex flex-col  text-black items-center cursor-pointer" onClick={togglePopup}>
                             <BiUserCircle className="h-8 w-8 mb-1" color="#b4b4b4" />
                             <span>Login</span>
-                        </div>}
+                        </Link>}
 
                     {Loggedin &&
                         <>
-                            <div className=" flex flex-col cursor-pointer bg-blac ">
+                            <Link className=" flex flex-col  text-black cursor-pointer bg-blac ">
                                 <svg className="w-[30px] h-[34px]">
                                     <path
 
@@ -136,16 +136,16 @@ function Home() {
                                 </svg>
 
                                 <span>Trips</span>
-                            </div>
-                            <div className="flex flex-col items-center cursor-pointer ">
+                            </Link>
+                            <Link className="flex flex-col  text-black items-center cursor-pointer ">
                                 <BiMessage className="h-8 w-8 mb-1" color="#b4b4b4" />
                                 <span>Inbox</span>
-                            </div>
+                            </Link>
 
-                            <div className="flex flex-col items-center cursor-pointer">
+                            <Link className="flex flex-col  text-black  items-center cursor-pointer">
                                 <BiUserCircle className="h-8 w-8 mb-1" color="#b4b4b4" />
                                 <span>Profile</span>
-                            </div></>}
+                            </Link></>}
 
                 </div>
             </div>}
@@ -164,12 +164,12 @@ function Home() {
 
 
 
-            <div className=" flex justify-evenly mt-8 lg:mt-6  lg:p-8 lg:gap-x-8 lg:gap-y-12  p-3 flex-wrap gap-x-2 gap-y-20 animate-pop-up">
+            <div className=" flex justify-evenly lg:mt-52 mt-52  lg:gap-x-8 lg:gap-y-12  p-3 flex-wrap gap-x-2 gap-y-20 animate-pop-up">
 
                 {Category.length > 0 &&
                     (shuffleArray(Category)?.map((items, index) =>
                     (
-                        <div className="relative  animate-pop-up    rounded-xl" key={index}>
+                        <div className="relative   animate-pop-up    rounded-xl" key={index}>
                             <Carousel className=" rounded-xl lg:w-[260px] lg:h-[250px] w-full h-[400px]   overflow-hidden"
                                 autoPlay
                                 transition={{ duration: 2 }}
