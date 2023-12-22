@@ -14,8 +14,8 @@ module.exports = withMT({
         "ash2": "rgb(137,137,137)"
       },
       animation: {
-        'slide-in': 'slideIn 0.5s forwards',
-        'pop-up': 'popUp 0.8s forwards',
+        'slide-in': 'slideIn 2s forwards',
+        'pop-up': 'popUp 2s forwards',
       },
       keyframes: {
         slideIn: {
